@@ -1,0 +1,14 @@
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\DAL.dll.config
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\DAL.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\DAL.pdb
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\BE.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\EntityFramework.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\BE.pdb
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\BE.dll.config
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\EntityFramework.xml
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.pdb

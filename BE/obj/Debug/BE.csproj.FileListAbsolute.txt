@@ -1,0 +1,6 @@
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\bin\Debug\BE.dll.config
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\bin\Debug\BE.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\bin\Debug\BE.pdb
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.dll
+C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.pdb

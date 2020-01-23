@@ -21,5 +21,12 @@ namespace BE
         public Boolean EstaDisponible { get; set; }
         [Required]
         public RolUsuarioEmun Rol { get; }
+        public virtual ICollection<Equipo> Equipo { get; set; }
+
+        public Usuario()
+        {
+            this.Equipo = new HashSet<Equipo>();
+        }
+
     }
 }

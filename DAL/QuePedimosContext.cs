@@ -10,10 +10,18 @@ namespace DAL
 {
     public class QuePedimosContext : DbContext
     {
+        public QuePedimosContext()
+            :base("DAL.QuePedimosDB")
+        {
+        }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Equipo> Equipo { get; set; }
         public DbSet<Comida> Comida { get; set; }
         public DbSet<Pedido> Pedido { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder){
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }

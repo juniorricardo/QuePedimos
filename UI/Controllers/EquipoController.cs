@@ -13,12 +13,14 @@ namespace UI.Controllers
 {
     public class EquipoController : Controller
     {
-        private EquipoBL db = new EquipoBL();
+        private EquipoBL dbEquipo = new EquipoBL();
+        private UsuarioBL dbUsuario = new UsuarioBL();
 
         // GET: Equipo
         public ActionResult Index()
         {
-            return View(db.ListaEquipos());
+            ObtenerListaUsuarios();
+            return View(dbEquipo.ListaEquipos());
         }
 
         // GET: Equipo/Details/5
@@ -28,7 +30,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = db.BuscarEquipoPorId(id);
+            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -51,7 +53,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AgregarEquipo(equipo);
+                dbEquipo.AgregarEquipo(equipo);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +67,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = db.BuscarEquipoPorId(id);
+            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -82,7 +84,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ActualizarUsuario(equipo);
+                dbEquipo.ActualizarUsuario(equipo);
                 return RedirectToAction("Index");
             }
             return View(equipo);
@@ -95,7 +97,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = db.BuscarEquipoPorId(id);
+            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -108,9 +110,14 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Equipo equipo = db.BuscarEquipoPorId(id);
-            db.EliminarEquipo(equipo);
+            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
+            dbEquipo.EliminarEquipo(equipo);
             return RedirectToAction("Index");
+        }
+
+        public void ObtenerListaUsuarios()
+        {
+            var usuario = dbUsuario.ListaUsuarios().Find(u => u.Nombre == "Elias");
         }
 
         //protected override void Dispose(bool disposing)
@@ -121,5 +128,6 @@ namespace UI.Controllers
         //    }
         //    base.Dispose(disposing);
         //}
+
     }
 }

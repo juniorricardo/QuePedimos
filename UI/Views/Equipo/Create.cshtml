@@ -14,6 +14,30 @@
     <div class="form-horizontal">
         <h4>Equipo</h4>
         <hr />
+
+        <h3>Lista de Integrantes</h3>
+
+        <form>
+
+            <asp:ListBox id="ListBox1" 
+                Rows="6"
+                Width="100px"
+                SelectionMode="Multiple" 
+                runat="server">
+
+                <asp:ListItem>Item 1</asp:ListItem>
+                <asp:ListItem>Item 2</asp:ListItem>
+                <asp:ListItem>Item 3</asp:ListItem>
+                <asp:ListItem>Item 4</asp:ListItem>
+                <asp:ListItem>Item 5</asp:ListItem>
+                <asp:ListItem>Item 6</asp:ListItem>
+
+            </asp:ListBox>
+                
+        </form>
+
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FechaCreado, htmlAttributes: new { @class = "control-label col-md-2" })

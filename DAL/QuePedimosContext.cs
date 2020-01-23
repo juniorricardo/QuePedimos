@@ -11,7 +11,9 @@ namespace DAL
     public class QuePedimosContext : DbContext
     {
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Equipo> Equipo { get; set; }
         public DbSet<Comida> Comida { get; set; }
+        public DbSet<Pedido> Pedido { get; set; }
 
     }
 }

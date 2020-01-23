@@ -4,3 +4,9 @@ C:\Users\jrhuamani\source\repos\QuePedimos\BE\bin\Debug\BE.pdb
 C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.csprojAssemblyReference.cache
 C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.dll
 C:\Users\jrhuamani\source\repos\QuePedimos\BE\obj\Debug\BE.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\bin\Debug\BE.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\bin\Debug\BE.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\bin\Debug\BE.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\obj\Debug\BE.csprojAssemblyReference.cache
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\obj\Debug\BE.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BE\obj\Debug\BE.pdb

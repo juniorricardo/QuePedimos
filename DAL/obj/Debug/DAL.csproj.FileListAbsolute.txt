@@ -12,3 +12,17 @@ C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.csprojAssemblyRefer
 C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.dll
 C:\Users\jrhuamani\source\repos\QuePedimos\DAL\obj\Debug\DAL.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\DAL.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\DAL.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\DAL.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\BE.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\EntityFramework.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\BE.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\BE.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\EntityFramework.xml
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\obj\Debug\DAL.csproj.CopyComplete
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\obj\Debug\DAL.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\DAL\obj\Debug\DAL.pdb

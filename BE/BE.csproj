@@ -48,7 +48,6 @@
     <Compile Include="Equipo.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegitroEquipoComida.cs" />
     <Compile Include="RolUsuarioEmun.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

@@ -1,0 +1,17 @@
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BL.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BL.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BL.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BE.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\DAL.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\EntityFramework.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BE.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\BE.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\DAL.pdb
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\DAL.dll.config
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\EntityFramework.xml
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\obj\Debug\BL.csprojAssemblyReference.cache
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\obj\Debug\BL.csproj.CopyComplete
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\obj\Debug\BL.dll
+E:\Mitsuha\Repositorio\CDA\QuePedimos\BL\obj\Debug\BL.pdb

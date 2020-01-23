@@ -11,105 +11,105 @@ using BL;
 
 namespace UI.Controllers
 {
-    public class ComidaController : Controller
+    public class EquipoController : Controller
     {
-        private ComidaBL db = new ComidaBL();
+        private EquipoBL db = new EquipoBL();
 
-        // GET: Comida
+        // GET: Equipo
         public ActionResult Index()
         {
-            return View(db.ListaComidas());
+            return View(db.ListaEquipos());
         }
 
-        // GET: Comida/Details/5
+        // GET: Equipo/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Equipo equipo = db.BuscarEquipoPorId(id);
+            if (equipo == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(equipo);
         }
 
-        // GET: Comida/Create
+        // GET: Equipo/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Comida/Create
+        // POST: Equipo/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nombre")] Comida comida)
+        public ActionResult Create([Bind(Include = "Id,FechaCreado,FechaUltimaModificacion")] Equipo equipo)
         {
             if (ModelState.IsValid)
             {
-                db.AgregarComida(comida);
+                db.AgregarEquipo(equipo);
                 return RedirectToAction("Index");
             }
 
-            return View(comida);
+            return View(equipo);
         }
 
-        // GET: Comida/Edit/5
+        // GET: Equipo/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Equipo equipo = db.BuscarEquipoPorId(id);
+            if (equipo == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(equipo);
         }
 
-        // POST: Comida/Edit/5
+        // POST: Equipo/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nombre")] Comida comida)
+        public ActionResult Edit([Bind(Include = "Id,FechaCreado,FechaUltimaModificacion")] Equipo equipo)
         {
             if (ModelState.IsValid)
             {
-                db.ActualizarComida(comida);
+                db.ActualizarUsuario(equipo);
                 return RedirectToAction("Index");
             }
-            return View(comida);
+            return View(equipo);
         }
 
-        // GET: Comida/Delete/5
+        // GET: Equipo/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Equipo equipo = db.BuscarEquipoPorId(id);
+            if (equipo == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(equipo);
         }
 
-        // POST: Comida/Delete/5
+        // POST: Equipo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comida comida = db.BuscarComidaPorId(id);
-            db.EliminarComida(comida);
+            Equipo equipo = db.BuscarEquipoPorId(id);
+            db.EliminarEquipo(equipo);
             return RedirectToAction("Index");
         }
 

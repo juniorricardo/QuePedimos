@@ -11,105 +11,105 @@ using BL;
 
 namespace UI.Controllers
 {
-    public class ComidaController : Controller
+    public class UsuarioController : Controller
     {
-        private ComidaBL db = new ComidaBL();
+        private UsuarioBL db = new UsuarioBL();
 
-        // GET: Comida
+        // GET: Usuario
         public ActionResult Index()
         {
-            return View(db.ListaComidas());
+            return View(db.ListaUsuarios());
         }
 
-        // GET: Comida/Details/5
+        // GET: Usuario/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Usuario usuario = db.BuscarUsuarioPorId(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(usuario);
         }
 
-        // GET: Comida/Create
+        // GET: Usuario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Comida/Create
+        // POST: Usuario/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nombre")] Comida comida)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Apellido,Correo,Dni,EstaDisponible")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.AgregarComida(comida);
+                db.AgregarUsuario(usuario);
                 return RedirectToAction("Index");
             }
 
-            return View(comida);
+            return View(usuario);
         }
 
-        // GET: Comida/Edit/5
+        // GET: Usuario/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Usuario usuario = db.BuscarUsuarioPorId(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(usuario);
         }
 
-        // POST: Comida/Edit/5
+        // POST: Usuario/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nombre")] Comida comida)
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Apellido,Correo,Dni,EstaDisponible")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.ActualizarComida(comida);
+                db.ActualizarUsuario(usuario);
                 return RedirectToAction("Index");
             }
-            return View(comida);
+            return View(usuario);
         }
 
-        // GET: Comida/Delete/5
+        // GET: Usuario/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
-            if (comida == null)
+            Usuario usuario = db.BuscarUsuarioPorId(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(comida);
+            return View(usuario);
         }
 
-        // POST: Comida/Delete/5
+        // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comida comida = db.BuscarComidaPorId(id);
-            db.EliminarComida(comida);
+            Usuario usuario = db.BuscarUsuarioPorId(id);
+            db.EliminarUsuario(usuario);
             return RedirectToAction("Index");
         }
 

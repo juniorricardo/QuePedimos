@@ -170,8 +170,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ComidaController.cs" />
+    <Compile Include="Controllers\EquipoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +244,16 @@
     <Content Include="Views\Comida\Details.cshtml" />
     <Content Include="Views\Comida\Edit.cshtml" />
     <Content Include="Views\Comida\Index.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Equipo\Create.cshtml" />
+    <Content Include="Views\Equipo\Delete.cshtml" />
+    <Content Include="Views\Equipo\Details.cshtml" />
+    <Content Include="Views\Equipo\Edit.cshtml" />
+    <Content Include="Views\Equipo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

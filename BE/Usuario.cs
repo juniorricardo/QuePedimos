@@ -18,7 +18,7 @@ namespace BE
         [Required]
         public int Dni { get; set; }
         [Required]
-        public bool EstaDisponible { get; set; }
+        public Boolean EstaDisponible { get; set; }
         [Required]
         public RolUsuarioEmun Rol { get; }
     }

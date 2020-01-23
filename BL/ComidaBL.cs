@@ -9,9 +9,8 @@ using DAL;
 
 namespace BL
 {
-    public class BusinessLogicContextDB
+    public class ComidaBL
     {
-
         public List<Comida> ListaComidas()
         {
             using(var contexto = new QuePedimosContext())
@@ -20,7 +19,7 @@ namespace BL
             };
         }
 
-        public Comida BuscarComida(int? enComidaId)
+        public Comida BuscarComidaPorId(int? enComidaId)
         {
             using (var contexto = new QuePedimosContext())
             {

@@ -27,20 +27,30 @@ namespace BL
             };
         }
 
-        public void AgregarEquipo(Equipo enEquipo)
+        public void AgregarEquipo(int[] listaIntegrantesIds)
         {
             using (var contexto = new QuePedimosContext())
             {
-                contexto.Equipo.Add(enEquipo);
+                //List<Usuario> nuevosIntegrantes = (List<Usuario>)(contexto.Usuario.Select(x => listaIntegrantesIds.Where( y => y == x.Id) ));
+                var nuevosIntegrantes = contexto.Usuario.Where(r => listaIntegrantesIds.Contains(r.Id)).ToList();
+                var nuevoEquipo = new Equipo()
+                {
+                    FechaCreado = DateTime.Now,
+                    FechaUltimaModificacion = DateTime.Now,
+                    Integrantes = nuevosIntegrantes,
+                    IntegrantesIds = listaIntegrantesIds.Select(s => s.ToString()).ToArray()
+                };
+                contexto.Equipo.Add(nuevoEquipo);
                 contexto.SaveChanges();
             };
         }
 
-        public void ActualizarUsuario(Equipo enEquipo)
+        public void ActualizarEquipo(Equipo enEquipo)
         {
             using (var contexto = new QuePedimosContext())
             {
                 contexto.Entry(enEquipo).State = EntityState.Modified;
+                enEquipo.FechaUltimaModificacion = DateTime.Now;
                 contexto.SaveChanges();
             };
         }
@@ -49,11 +59,12 @@ namespace BL
         {
             using (var contexto = new QuePedimosContext())
             {
+                contexto.Entry(enEquipo).State = EntityState.Deleted;
                 contexto.Equipo.Remove(enEquipo);
                 contexto.SaveChanges();
             };
         }
 
-        
+
     }
 }

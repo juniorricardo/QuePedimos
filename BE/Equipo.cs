@@ -12,8 +12,11 @@ namespace BE
         public DateTime FechaCreado { get; set; }
         public DateTime FechaUltimaModificacion { get; set; }
 
+        public string[] IntegrantesIds { get; set; }
+
         public Equipo(){
             this.Integrantes = new HashSet<Usuario>();
         }
+
     }
 }

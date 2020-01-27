@@ -23,6 +23,8 @@ namespace BE
         public RolUsuarioEmun Rol { get; }
         public virtual ICollection<Equipo> Equipo { get; set; }
 
+        public string NombreApellido { get { return string.Format("{0} {1}", Nombre, Apellido);  } }
+
         public Usuario()
         {
             this.Equipo = new HashSet<Equipo>();

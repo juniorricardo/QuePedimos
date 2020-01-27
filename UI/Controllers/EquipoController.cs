@@ -19,7 +19,6 @@ namespace UI.Controllers
         // GET: Equipo
         public ActionResult Index()
         {
-            ObtenerListaUsuarios();
             return View(dbEquipo.ListaEquipos());
         }
 
@@ -38,9 +37,16 @@ namespace UI.Controllers
             return View(equipo);
         }
 
+
+        #region ABM.Controllers-Equipo
+
+
         // GET: Equipo/Create
         public ActionResult Create()
         {
+            var listaUsuarios = new List<Usuario>();
+            listaUsuarios = dbUsuario.ListaUsuarios();
+            ViewBag.listaUsuarios = listaUsuarios;
             return View();
         }
 
@@ -49,15 +55,15 @@ namespace UI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FechaCreado,FechaUltimaModificacion")] Equipo equipo)
+        public ActionResult Create([Bind(Include = "Empleados")]int[] Empleados)
         {
             if (ModelState.IsValid)
             {
-                dbEquipo.AgregarEquipo(equipo);
+                dbEquipo.AgregarEquipo(Empleados);
                 return RedirectToAction("Index");
             }
 
-            return View(equipo);
+            return View();
         }
 
         // GET: Equipo/Edit/5
@@ -84,7 +90,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbEquipo.ActualizarUsuario(equipo);
+                dbEquipo.ActualizarEquipo(equipo);
                 return RedirectToAction("Index");
             }
             return View(equipo);
@@ -117,8 +123,9 @@ namespace UI.Controllers
 
         public void ObtenerListaUsuarios()
         {
-            var usuario = dbUsuario.ListaUsuarios().Find(u => u.Nombre == "Elias");
+            var usuario = dbUsuario.ListaUsuarios();
         }
+        #endregion
 
         //protected override void Dispose(bool disposing)
         //{

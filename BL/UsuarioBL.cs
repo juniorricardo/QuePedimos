@@ -15,6 +15,7 @@ namespace BL
         {
             using (var contexto = new QuePedimosContext())
             {
+                //var integrantes = 
                 return contexto.Usuario.ToList();
             };
         }
@@ -49,6 +50,7 @@ namespace BL
         {
             using (var contexto = new QuePedimosContext())
             {
+                contexto.Entry(enUsuario).State = EntityState.Deleted;
                 contexto.Usuario.Remove(enUsuario);
                 contexto.SaveChanges();
             };

@@ -36,19 +36,20 @@ namespace BL
             };
         }
 
-        public void ActualizarComida(Comida comida)
+        public void ActualizarComida(Comida enComida)
         {
             using (var contexto = new QuePedimosContext())
             {
-                contexto.Entry(comida).State = EntityState.Modified;
+                contexto.Entry(enComida).State = EntityState.Modified;
                 contexto.SaveChanges();
             };
         }
 
-        public void EliminarComida(Comida comida)
+        public void EliminarComida(Comida enComida)
         {
             using (var contexto = new QuePedimosContext()) {
-                contexto.Comida.Remove(comida);
+                contexto.Entry(enComida).State = EntityState.Deleted;
+                contexto.Comida.Remove(enComida);
                 contexto.SaveChanges();
             };
         }

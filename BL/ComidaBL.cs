@@ -6,52 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using DAL;
+using DAL.DAO;
 
 namespace BL
 {
     public class ComidaBL
     {
+        private ComidaDAO comidaDao = new ComidaDAO();
         public List<Comida> ListaComidas()
         {
-            using(var contexto = new QuePedimosContext())
-            {
-                return contexto.Comida.ToList();
-            };
+            return comidaDao.ListarComida();
         }
 
         public Comida BuscarComidaPorId(int? enComidaId)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Comida.Find(enComidaId);
-            };
+            return comidaDao.BuscarComidaId(enComidaId);
         }
 
         public void AgregarComida(Comida enComida)
         {
-            using (var contexto = new QuePedimosContext()) 
-            {
-                contexto.Comida.Add(enComida);
-                contexto.SaveChanges();
-            };
+            comidaDao.AgregarComida(enComida);
         }
 
         public void ActualizarComida(Comida enComida)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Entry(enComida).State = EntityState.Modified;
-                contexto.SaveChanges();
-            };
+            comidaDao.ActualizarComida(enComida);
         }
 
         public void EliminarComida(Comida enComida)
         {
-            using (var contexto = new QuePedimosContext()) {
-                contexto.Entry(enComida).State = EntityState.Deleted;
-                contexto.Comida.Remove(enComida);
-                contexto.SaveChanges();
-            };
+            comidaDao.EliminarComida(enComida);
         }
     }
 }

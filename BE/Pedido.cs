@@ -6,6 +6,7 @@ using System.Text;
 
 namespace BE
 {
+    [Table("Pedido")]
     public class Pedido
     {
         #region Constructores

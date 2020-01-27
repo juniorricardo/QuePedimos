@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using DAL.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,49 +12,30 @@ namespace BL
 {
     public class UsuarioBL
     {
+        private UsuarioDAO usuarioDao = new UsuarioDAO();
         public List<Usuario> ListaUsuarios()
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                //var integrantes = 
-                return contexto.Usuario.ToList();
-            };
+            return usuarioDao.ListarUsuarios();
         }
 
         public Usuario BuscarUsuarioPorId(int? enUsuarioId)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Usuario.Find(enUsuarioId);
-            };
+            return usuarioDao.BuscarPorId(enUsuarioId);
         }
 
         public void AgregarUsuario(Usuario enUsuario)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Usuario.Add(enUsuario);
-                contexto.SaveChanges();
-            };
+            usuarioDao.AgregarUsuario(enUsuario);
         }
 
         public void ActualizarUsuario(Usuario enUsuario)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Entry(enUsuario).State = EntityState.Modified;
-                contexto.SaveChanges();
-            };
+            usuarioDao.ActualizarUsuario(enUsuario);
         }
 
         public void EliminarUsuario(Usuario enUsuario)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Entry(enUsuario).State = EntityState.Deleted;
-                contexto.Usuario.Remove(enUsuario);
-                contexto.SaveChanges();
-            };
+            usuarioDao.EliminarUsuario(enUsuario);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace BL
         {
             using (var contexto = new QuePedimosContext())
             {
+                var nueva = from contexto.
                 return contexto.Equipo.ToList();
             };
         }

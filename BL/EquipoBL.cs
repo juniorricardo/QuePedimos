@@ -15,7 +15,6 @@ namespace BL
         {
             using (var contexto = new QuePedimosContext())
             {
-                var nueva = from contexto.
                 return contexto.Equipo.ToList();
             };
         }
@@ -38,8 +37,8 @@ namespace BL
                 {
                     FechaCreado = DateTime.Now,
                     FechaUltimaModificacion = DateTime.Now,
-                    Integrantes = nuevosIntegrantes,
-                    IntegrantesIds = listaIntegrantesIds.Select(s => s.ToString()).ToArray()
+                    //Integrantes = nuevosIntegrantes,
+                    //IntegrantesIds = listaIntegrantesIds.Select(s => s.ToString()).ToArray()
                 };
                 contexto.Equipo.Add(nuevoEquipo);
                 contexto.SaveChanges();

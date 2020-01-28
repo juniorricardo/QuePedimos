@@ -23,13 +23,13 @@ namespace BE
         public Boolean EstaDisponible { get; set; }
         [Required]
         public RolUsuarioEmun Rol { get; }
-        public virtual ICollection<Equipo> Equipo { get; set; }
 
         public string NombreApellido { get { return string.Format("{0} {1}", Nombre, Apellido);  } }
 
+        public virtual ICollection<Equipo> Equipos { get; set; }
         public Usuario()
         {
-            this.Equipo = new HashSet<Equipo>();
+            this.Equipos = new HashSet<Equipo>();
         }
 
     }

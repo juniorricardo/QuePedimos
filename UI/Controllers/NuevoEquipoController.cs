@@ -7,29 +7,28 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BE;
-using BL;
+using DAL;
 
 namespace UI.Controllers
 {
-    public class EquipoController : Controller
+    public class NuevoEquipoController : Controller
     {
-        private EquipoBL dbEquipo = new EquipoBL();
-        private UsuarioBL dbUsuario = new UsuarioBL();
+        private QuePedimosContext db = new QuePedimosContext();
 
-        // GET: Equipo
+        // GET: NuevoEquipo
         public ActionResult Index()
         {
-            return View(dbEquipo.ListaEquipos());
+            return View(db.Equipo.ToList());
         }
 
-        // GET: Equipo/Details/5
+        // GET: NuevoEquipo/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
+            Equipo equipo = db.Equipo.Find(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -37,20 +36,14 @@ namespace UI.Controllers
             return View(equipo);
         }
 
-
-        #region ABM.Controllers-Equipo
-
-
-        // GET: Equipo/Create
+        // GET: NuevoEquipo/Create
         public ActionResult Create()
         {
-            var listaUsuarios = new List<Usuario>();
-            listaUsuarios = dbUsuario.ListaUsuarios();
-            ViewBag.listaUsuarios = listaUsuarios;
+            ViewBag.listaUsuarios = db.Usuario.ToList();
             return View();
         }
 
-        // POST: Equipo/Create
+        // POST: NuevoEquipo/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,20 +52,29 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbEquipo.AgregarEquipo(Empleados);
+                var nuevosIntegrantes = db.Usuario.Where(r => Empleados.Contains(r.Id)).ToList();
+                Equipo nuevoEquipo = new Equipo()
+                {
+                    Integrantes = nuevosIntegrantes,
+                    FechaCreado = DateTime.Now,
+                    FechaUltimaModificacion = DateTime.Now
+                };
+                db.Equipo.Add(nuevoEquipo);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
-        // GET: Equipo/Edit/5
+        // GET: NuevoEquipo/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
+            Equipo equipo = db.Equipo.Find(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -80,7 +82,7 @@ namespace UI.Controllers
             return View(equipo);
         }
 
-        // POST: Equipo/Edit/5
+        // POST: NuevoEquipo/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,20 +91,21 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbEquipo.ActualizarEquipo(equipo);
+                db.Entry(equipo).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(equipo);
         }
 
-        // GET: Equipo/Delete/5
+        // GET: NuevoEquipo/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
+            Equipo equipo = db.Equipo.Find(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -110,30 +113,24 @@ namespace UI.Controllers
             return View(equipo);
         }
 
-        // POST: Equipo/Delete/5
+        // POST: NuevoEquipo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Equipo equipo = dbEquipo.BuscarEquipoPorId(id);
-            dbEquipo.EliminarEquipo(equipo);
+            Equipo equipo = db.Equipo.Find(id);
+            db.Equipo.Remove(equipo);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public void ObtenerListaUsuarios()
+        protected override void Dispose(bool disposing)
         {
-            var usuario = dbUsuario.ListaUsuarios();
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
-        #endregion
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
-
     }
 }

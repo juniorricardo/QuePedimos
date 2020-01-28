@@ -10,13 +10,14 @@ namespace BE
     {
         public int Id { get; set; }
         public Usuario Lider { get; set; }
-        public ICollection<Usuario> Integrantes { get; set; }
         public DateTime FechaCreado { get; set; }
         public DateTime FechaUltimaModificacion { get; set; }
 
-        public string[] IntegrantesIds { get; set; }
+        //public string[] IntegrantesIds { get; set; }
 
-        public Equipo(){
+        public virtual ICollection<Usuario> Integrantes { get; set; }
+        public Equipo()
+        {
             this.Integrantes = new HashSet<Usuario>();
         }
 

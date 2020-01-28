@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    [Table("UsuarioEquipo")]
+    //[Table("UsuarioEquipo")]
     public class UsuarioEquipo
     {
         public int Id { get; set; }

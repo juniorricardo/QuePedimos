@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using DAL.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,60 +12,31 @@ namespace BL
 {
     public class EquipoBL
     {
+        private EquipoDAO equipoDao = new EquipoDAO();
         public List<Equipo> ListaEquipos()
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Equipo.ToList();
-            };
+            return equipoDao.ListarEquipos();
         }
 
         public Equipo BuscarEquipoPorId(int? enEquipoId)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Equipo.Find(enEquipoId);
-            };
+            return equipoDao.BuscarEquipoPorId(enEquipoId);
         }
 
-        public void AgregarEquipo(int[] listaIntegrantesIds)
+        public void AgregarEquipo(int[] enListaIntegrantesIds)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                //List<Usuario> nuevosIntegrantes = (List<Usuario>)(contexto.Usuario.Select(x => listaIntegrantesIds.Where( y => y == x.Id) ));
-                var nuevosIntegrantes = contexto.Usuario.Where(r => listaIntegrantesIds.Contains(r.Id)).ToList();
-                var nuevoEquipo = new Equipo()
-                {
-                    FechaCreado = DateTime.Now,
-                    FechaUltimaModificacion = DateTime.Now,
-                    //Integrantes = nuevosIntegrantes,
-                    //IntegrantesIds = listaIntegrantesIds.Select(s => s.ToString()).ToArray()
-                };
-                contexto.Equipo.Add(nuevoEquipo);
-                contexto.SaveChanges();
-            };
+            equipoDao.AgregarEquipo(enListaIntegrantesIds);
         }
 
         public void ActualizarEquipo(Equipo enEquipo)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Entry(enEquipo).State = EntityState.Modified;
-                enEquipo.FechaUltimaModificacion = DateTime.Now;
-                contexto.SaveChanges();
-            };
+            equipoDao.ActualizarEquipo(enEquipo);
         }
 
-        public void EliminarEquipo(Equipo enEquipo)
+        public void EliminarEquipo(int enEquipoId)
         {
-            using (var contexto = new QuePedimosContext())
-            {
-                contexto.Entry(enEquipo).State = EntityState.Deleted;
-                contexto.Equipo.Remove(enEquipo);
-                contexto.SaveChanges();
-            };
+            equipoDao.EliminarEquipo(enEquipoId);
         }
-
 
     }
 }

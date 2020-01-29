@@ -13,12 +13,12 @@ namespace UI.Controllers
 {
     public class UsuarioController : Controller
     {
-        private UsuarioBL db = new UsuarioBL();
+        private UsuarioBL usuarioBL = new UsuarioBL();
 
         // GET: Usuario
         public ActionResult Index()
         {
-            return View(db.ListaUsuarios());
+            return View(usuarioBL.ListaUsuarios());
         }
 
         // GET: Usuario/Details/5
@@ -28,7 +28,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.BuscarUsuarioPorId(id);
+            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AgregarUsuario(usuario);
+                usuarioBL.AgregarUsuario(usuario);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.BuscarUsuarioPorId(id);
+            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ActualizarUsuario(usuario);
+                usuarioBL.ActualizarUsuario(usuario);
                 return RedirectToAction("Index");
             }
             return View(usuario);
@@ -95,7 +95,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.BuscarUsuarioPorId(id);
+            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -108,8 +108,7 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.BuscarUsuarioPorId(id);
-            db.EliminarUsuario(usuario);
+            usuarioBL.EliminarUsuario(id);
             return RedirectToAction("Index");
         }
 

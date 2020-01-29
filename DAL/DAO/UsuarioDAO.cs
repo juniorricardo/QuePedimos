@@ -14,7 +14,6 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                //var integrantes = 
                 return contexto.Usuario.ToList();
             };
         }
@@ -44,12 +43,13 @@ namespace DAL.DAO
                 contexto.SaveChanges();
             };
         }
-        public void EliminarUsuario(Usuario enUsuario)
+        public void EliminarUsuario(int enUsuarioId)
         {
             using (var contexto = new QuePedimosContext())
             {
-                contexto.Entry(enUsuario).State = EntityState.Deleted;
-                contexto.Usuario.Remove(enUsuario);
+                Usuario usuario = contexto.Usuario.Find(enUsuarioId);
+                contexto.Entry(usuario).State = EntityState.Deleted;
+                contexto.Usuario.Remove(usuario);
                 contexto.SaveChanges();
             };
         }

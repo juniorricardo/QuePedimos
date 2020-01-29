@@ -30,6 +30,6 @@ namespace UI.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<BE.Usuario> Usuarios { get; set; }
+       public System.Data.Entity.DbSet<BE.Usuario> Usuarios { get; set; }
     }
 }

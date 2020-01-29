@@ -1,39 +1,64 @@
 ﻿@model IEnumerable<BE.Equipo>
 
 @{
-    ViewBag.Title = "Inicio";
+    ViewBag.Title = "Equipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Nuevo equipo", "Create")
+    @Html.ActionLink("Crear equipo", "Create", "Equipo",new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FechaCreado)
+            <label>Lider de equipo</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaUltimaModificacion)
+            <label>Integrantes</label>
         </th>
-        <th></th>
+        <th>
+            <label>Sorteo</label>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreado)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FechaCreado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaUltimaModificacion)
+            </th>*@
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalle", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lider.NombreApellido)
+            </td>
+            <td>
+                <ul class="list-group list-group-flush">
+                    @foreach (var integrante in item.Integrantes)
+                    {   <li class="list-group-item">@integrante.NombreApellido  </li>
 }
+                </ul>
+            </td>
+            <th>
+                <label>Cargando...</label>
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreado)
+            </td>
+            <td>
+                <div class="btn-group" role="group">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>

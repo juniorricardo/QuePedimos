@@ -13,12 +13,12 @@ namespace UI.Controllers
 {
     public class ComidaController : Controller
     {
-        private ComidaBL db = new ComidaBL();
+        private ComidaBL comidaBL = new ComidaBL();
 
         // GET: Comida
         public ActionResult Index()
         {
-            return View(db.ListaComidas());
+            return View(comidaBL.ListaComidas());
         }
 
         // GET: Comida/Details/5
@@ -28,7 +28,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
+            Comida comida = comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AgregarComida(comida);
+                comidaBL.AgregarComida(comida);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
+            Comida comida = comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ActualizarComida(comida);
+                comidaBL.ActualizarComida(comida);
                 return RedirectToAction("Index");
             }
             return View(comida);
@@ -95,7 +95,7 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = db.BuscarComidaPorId(id);
+            Comida comida = comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
@@ -108,8 +108,8 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comida comida = db.BuscarComidaPorId(id);
-            db.EliminarComida(comida);
+            Comida comida = comidaBL.BuscarComidaPorId(id);
+            comidaBL.EliminarComida(comida);
             return RedirectToAction("Index");
         }
 

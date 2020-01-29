@@ -33,9 +33,9 @@ namespace BL
             usuarioDao.ActualizarUsuario(enUsuario);
         }
 
-        public void EliminarUsuario(Usuario enUsuario)
+        public void EliminarUsuario(int enUsuarioId)
         {
-            usuarioDao.EliminarUsuario(enUsuario);
+            usuarioDao.EliminarUsuario(enUsuarioId);
         }
     }
 }

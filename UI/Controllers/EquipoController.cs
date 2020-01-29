@@ -21,8 +21,9 @@ namespace UI.Controllers
         // GET: NuevoEquipo
         public ActionResult Index()
         {
-            // Desta manera se muesta error de Disposed
+            // De esta manera se muesta error de Disposed
             // The ObjectContext instance has been disposed and can no longer be used for operations that require a connection.'
+            // en el model para listar integrantes de un equipo, no tiene acceso a la lista de los integrantes  
             //var listaEquipos = equipoBL.ListaEquipos();
             return View(db.Equipo.ToList());
         }
@@ -39,6 +40,9 @@ namespace UI.Controllers
             {
                 return HttpNotFound();
             }
+            //listar 
+            //      integrantes lider
+            ViewBag.listaUsuarios = 
             return View(equipo);
         }
 

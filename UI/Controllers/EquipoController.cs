@@ -81,7 +81,7 @@ namespace UI.Controllers
             var integrantes = equipoBL.ListarIntegranteEquipo((int)id);
             ViewBag.listaIntegrantes = integrantes;
             ViewBag.listaNuevosIntegrantes = usuarioBL.ListaUsuarios()
-                                                      .Except(integrantes.ToList())
+                                                      .Except(integrantes)
                                                       .ToList();
 
             return View(equipo);

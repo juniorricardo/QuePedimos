@@ -78,7 +78,12 @@ namespace UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listaUsuarios = equipoBL.ListarIntegranteEquipo((int)id).ToList();
+            var integrantes = equipoBL.ListarIntegranteEquipo((int)id);
+            ViewBag.listaIntegrantes = integrantes;
+            ViewBag.listaNuevosIntegrantes = usuarioBL.ListaUsuarios()
+                                                      .Except(integrantes.ToList())
+                                                      .ToList();
+
             return View(equipo);
         }
 

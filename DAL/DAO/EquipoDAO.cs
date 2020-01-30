@@ -14,9 +14,36 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Equipo.ToList();
+                var lista = contexto.Equipo.ToList();
+                return lista;
             };
         }
+        public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
+        {
+            using (var contexto = new QuePedimosContext())
+            {
+                return contexto.Equipo.Find(enEquipoId).Integrantes.ToList();
+            };
+        }
+
+        //public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
+        //{
+        //    using (var contexto = new QuePedimosContext())
+        //    {
+        //        /*  
+        //         *  return (from empleado in entities.empleado
+        //                    join his_estructura in entities.his_estructura on empleado.ternro equals his_estructura.ternro
+        //                    join estructura in entities.estructura on his_estructura.estrnro equals estructura.estrnro
+        //                    where empleado.empest == -1 && estructura.tenro == 101 && contiene.Contains(empleado.empreporta) && his_estructura.htethasta == null && estructura.estrnro != 2268
+        //                    select new Cliente { codigo = estructura.estrnro.ToString(), descripcion = estructura.estrdabr }).Distinct().ToList();
+
+        //         */
+        //        return (from usuario in contexto.Usuario
+        //                join instancia in contexto.UsuarioEquipo on usuario.Id equals instancia.UsuarioId
+        //                where instancia.EquipoId == enEquipoId
+        //                select usuario).ToList();
+        //    };
+        //}
 
         public Equipo BuscarEquipoPorId(int? enEquipoId)
         {

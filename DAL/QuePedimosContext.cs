@@ -22,6 +22,7 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            base.Configuration.LazyLoadingEnabled = false;
             modelBuilder.Entity<Usuario>()
                         .HasMany<Equipo>(u => u.Equipos)
                         .WithMany(e => e.Integrantes)
@@ -32,6 +33,5 @@ namespace DAL
                                     eu.ToTable("UsuarioEquipo");
                                 });
         }
-
     }
 }

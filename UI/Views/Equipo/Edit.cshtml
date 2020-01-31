@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/chosen.css" />
+    <script src="~/Scripts/chosen.jquery.js"></script>
 }
 
 <h2>Edit</h2>
@@ -11,66 +13,58 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Equipo</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
 
+    <div class="form-horizontal">
+        <h4>Equipo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Integrantes</label>
+        <div class="form-group">
+            <label class="control-label col-md-2">Integrantes</label>
 
-        <div class="row">
-            <div class="col-md-3">
-                @Html.DropDownList("Empleados", new SelectList(ViewBag.listaIntegrantes, "Id", "NombreApellido"),
-                                               new
-                                               {
-                                                   @class = "form-control chosen-select",
-                                                   @multiple = true
-                                               })
-            </div>
-            <div class="col-md-4" style="border-color:red;">
-
-            </div>
-            <div class="col-md-3">
-                @Html.DropDownList("NuevosEmpleados", new SelectList(ViewBag.listaNuevosIntegrantes, "Id", "NombreApellido"),
-                                               new
-                                               {
-                                                   @class = "form-control chosen-select",
-                                                   @multiple = true
-                                               })
-            </div>
-        </div>
-    </div>
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.FechaCreado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaCreado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaCreado, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DropDownList("Empleados", new SelectList(ViewBag.Usuarios, "Id", "NombreApellido"),
+                                                   new
+                                                   {
+                                                       @class = "form-control chosen-select",
+                                                       @multiple = true
+                                                   })
+                </div>
+                @*<div class="col-md-3">
+                        @Html.DropDownList("Empleados", new SelectList(ViewBag.listaIntegrantes, "Id", "NombreApellido"),
+                                                       new
+                                                       {
+                                                           @class = "form-control chosen-select",
+                                                           @multiple = true
+                                                       })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("NuevosEmpleados", new SelectList(ViewBag.noIntegrantes, "Id", "NombreApellido"),
+                                                       new
+                                                       {
+                                                           @class = "form-control chosen-select",
+                                                           @multiple = true
+                                                       })
+                    </div>*@
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaUltimaModificacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaUltimaModificacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaUltimaModificacion, "", new { @class = "text-danger" })
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
-        </div>*@
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
-</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script>
+    $('.chosen-select').chosen()
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

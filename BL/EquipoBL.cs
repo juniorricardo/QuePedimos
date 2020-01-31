@@ -32,9 +32,10 @@ namespace BL
             equipoDao.AgregarEquipo(enListaIntegrantesIds);
         }
 
-        public void ActualizarEquipo(Equipo enEquipo)
+        public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
-            equipoDao.ActualizarEquipo(enEquipo);
+            //equipoDao.ActualizarEquipo(enEquipo);
+            equipoDao.ActualizarEquipo(enEquipoId, enIntegrantesIds);
         }
 
         public void EliminarEquipo(int enEquipoId)

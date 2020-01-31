@@ -53,33 +53,40 @@ namespace DAL.DAO
             };
         }
 
-        public void AgregarEquipo(int[] enListaIntegrantesIds)
+        public void AgregarEquipo(int[] enListaIntegrantesId)
         {
             using (var contexto = new QuePedimosContext())
             {
-                var nuevosIntegrantes = contexto.Usuario
-                                                .Where(r => enListaIntegrantesIds.Contains(r.Id))
-                                                .ToList();
                 contexto.Equipo.Add(new Equipo()
                 {
-                    Integrantes = nuevosIntegrantes,
+                    Integrantes = ListarUsuariosIds(enListaIntegrantesId),
                     FechaCreado = DateTime.Now,
                     FechaUltimaModificacion = DateTime.Now,
                 });
                 contexto.SaveChanges();
             };
-
         }
 
 
-        public void ActualizarEquipo(Equipo enEquipo)
+        public void ActualizarEquipo(int enEquipoId, int[] enListaIntegrantesId)
         {
             using (var contexto = new QuePedimosContext())
             {
-                contexto.Entry(enEquipo).State = EntityState.Modified;
-                enEquipo.FechaUltimaModificacion = DateTime.Now;
+
+                //var equipo = contexto.Equipo.Find(enEquipoId);
+                //equipo.FechaUltimaModificacion = DateTime.Now;
+                //equipo.Integrantes = ListarUsuariosIds(enListaIntegrantesId);
+
+                var equipo = contexto.Equipo.Find(enEquipoId);
+                equipo.FechaUltimaModificacion = DateTime.Now;
+                equipo.Integrantes = ListarUsuariosIds(enListaIntegrantesId);
+
+                //contexto.Equipo.Attach(equipo);
+                //contexto.Entry(equipo).Property(x => x.FechaUltimaModificacion).IsModified = true;
+                //contexto.Entry(equipo).Property(x => x.Integrantes).IsModified = true;
+
                 contexto.SaveChanges();
-            };
+            }
         }
         public void EliminarEquipo(int enEquipoId)
         {
@@ -90,6 +97,14 @@ namespace DAL.DAO
                 contexto.Equipo.Remove(equipo);
                 contexto.SaveChanges();
             };
+        }
+        public List<Usuario> ListarUsuariosIds(int[] enListaIntegrantesId)
+        {
+            using (var contexto = new QuePedimosContext())
+            {
+                return contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
+                                        .ToList();
+            }
         }
     }
 }

@@ -78,11 +78,21 @@ namespace UI.Controllers
             {
                 return HttpNotFound();
             }
-            var integrantes = equipoBL.ListarIntegranteEquipo((int)id);
-            ViewBag.listaIntegrantes = integrantes;
-            ViewBag.listaNuevosIntegrantes = usuarioBL.ListaUsuarios()
-                                                      .Except(integrantes)
-                                                      .ToList();
+            ViewBag.Usuarios = usuarioBL.ListaUsuarios();
+
+            #region Editar-Doble Lista
+            /*  Doble lista
+                var integrantes = equipoBL.ListarIntegranteEquipo((int)id);
+                var tablaUsuario = usuarioBL.ListaUsuarios();
+                var noIntegrantes = (from noInte in tablaUsuario
+                                     where !(from b in integrantes
+                                             select b.Id)
+                                             .Contains(noInte.Id)
+                                     select noInte).ToList();
+                ViewBag.noIntegrantes = noIntegrantes;
+                ViewBag.listaIntegrantes = integrantes;
+                 */
+            #endregion
 
             return View(equipo);
         }
@@ -92,14 +102,14 @@ namespace UI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FechaCreado,FechaUltimaModificacion")] Equipo equipo)
+        public ActionResult Edit(int Id, int[] Empleados)
         {
             if (ModelState.IsValid)
             {
-                equipoBL.ActualizarEquipo(equipo);
+                equipoBL.ActualizarEquipo(Id, Empleados);
                 return RedirectToAction("Index");
             }
-            return View(equipo);
+            return View();
         }
 
         // GET: NuevoEquipo/Delete/5

@@ -59,7 +59,7 @@ namespace DAL.DAO
             {
                 contexto.Equipo.Add(new Equipo()
                 {
-                    Integrantes = ListarUsuariosIds(enListaIntegrantesId),
+                    Integrantes = ListarUsuarios(enListaIntegrantesId),
                     FechaCreado = DateTime.Now,
                     FechaUltimaModificacion = DateTime.Now,
                 });
@@ -67,27 +67,21 @@ namespace DAL.DAO
             };
         }
 
-
-        public void ActualizarEquipo(int enEquipoId, int[] enListaIntegrantesId)
+            
+        public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
-            using (var contexto = new QuePedimosContext())
+            using (var db = new QuePedimosContext())
             {
+                var equipo = db.Equipo.Find(enEquipoId);
+                var lista = ListarUsuarios(enIntegrantesIds);
+                equipo.Integrantes.Clear();
+                lista.ForEach(x => equipo.Integrantes.Add(x));
 
-                //var equipo = contexto.Equipo.Find(enEquipoId);
-                //equipo.FechaUltimaModificacion = DateTime.Now;
-                //equipo.Integrantes = ListarUsuariosIds(enListaIntegrantesId);
+                db.SaveChanges();
 
-                var equipo = contexto.Equipo.Find(enEquipoId);
-                equipo.FechaUltimaModificacion = DateTime.Now;
-                equipo.Integrantes = ListarUsuariosIds(enListaIntegrantesId);
-
-                //contexto.Equipo.Attach(equipo);
-                //contexto.Entry(equipo).Property(x => x.FechaUltimaModificacion).IsModified = true;
-                //contexto.Entry(equipo).Property(x => x.Integrantes).IsModified = true;
-
-                contexto.SaveChanges();
-            }
+            };
         }
+        
         public void EliminarEquipo(int enEquipoId)
         {
             using (var contexto = new QuePedimosContext())
@@ -98,7 +92,7 @@ namespace DAL.DAO
                 contexto.SaveChanges();
             };
         }
-        public List<Usuario> ListarUsuariosIds(int[] enListaIntegrantesId)
+        public List<Usuario> ListarUsuarios(int[] enListaIntegrantesId)
         {
             using (var contexto = new QuePedimosContext())
             {

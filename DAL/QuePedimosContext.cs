@@ -24,7 +24,7 @@ namespace DAL
             base.OnModelCreating(modelBuilder);
             base.Configuration.LazyLoadingEnabled = false;
             modelBuilder.Entity<Usuario>()
-                        .HasMany<Equipo>(u => u.Equipos)
+                        .HasMany(u => u.Equipos)
                         .WithMany(e => e.Integrantes)
                         .Map(eu =>
                                 {

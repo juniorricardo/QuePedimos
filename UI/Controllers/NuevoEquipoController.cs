@@ -19,18 +19,17 @@ namespace UI.Controllers
         public ActionResult Index()
         {
             var equipo = db.Equipo.Select(x => new
-                                                {   Lider = x.Lider,
+                                                {   Id = x.Id,
+                                                    Lider = x.Lider,
                                                     Integrantes = x.Integrantes,
                                                     FechaCreado = x.FechaCreado,
                                                     FechaUltimaModificacion = x.FechaUltimaModificacion }).ToList()
                                   .Select(x => new Equipo()
-                                                {   Lider = x.Lider,
+                                                {   Id = x.Id,
+                                                    Lider = x.Lider,
                                                     FechaCreado = x.FechaCreado,
                                                     FechaUltimaModificacion = x.FechaUltimaModificacion,
                                                     Integrantes = x.Integrantes }).ToList();
-
-            //var integrantes = equipo.Integrantes;
-
             return View(equipo);
         }
 
@@ -41,7 +40,8 @@ namespace UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = db.Equipo.Find(id);
+            Equipo equipo = db.Equipo.Include("Integrantes")
+                                     .FirstOrDefault(e => e.Id == id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -52,6 +52,7 @@ namespace UI.Controllers
         // GET: NuevoEquipo/Create
         public ActionResult Create()
         {
+            ViewBag.istaUsuarios = db.Usuario.ToList();
             return View();
         }
 

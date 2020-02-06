@@ -14,17 +14,18 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                var lista = contexto.Equipo.ToList();
+                var lista = contexto.Equipo.Include("Integrantes")
+                                           .ToList();
                 return lista;
             };
         }
-        public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
-        {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Equipo.Find(enEquipoId).Integrantes.ToList();
-            };
-        }
+        //public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
+        //{
+        //    using (var contexto = new QuePedimosContext())
+        //    {
+        //        return contexto.Equipo.Find(enEquipoId).Integrantes.ToList();
+        //    };
+        //}
 
         //public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
         //{
@@ -49,7 +50,8 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Equipo.Find(enEquipoId);
+                return contexto.Equipo.Include("Integrantes")
+                                      .FirstOrDefault(x => x.Id == enEquipoId);
             };
         }
 
@@ -57,31 +59,35 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                contexto.Equipo.Add(new Equipo()
+                var equipo = new Equipo()
                 {
-                    Integrantes = ListarUsuarios(enListaIntegrantesId),
+                    Integrantes = contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
+                                                             .ToList(),
                     FechaCreado = DateTime.Now,
-                    FechaUltimaModificacion = DateTime.Now,
-                });
+                    FechaUltimaModificacion = DateTime.Now
+                };
+
+                contexto.Equipo.Add(equipo);
+
                 contexto.SaveChanges();
             };
         }
 
-            
+
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
-            using (var db = new QuePedimosContext())
+            using (var contexto = new QuePedimosContext())
             {
-                var equipo = db.Equipo.Find(enEquipoId);
-                var lista = ListarUsuarios(enIntegrantesIds);
+                //  Traer el objeto y actualizar los integrantes, antes limpiar el contenido de ellos
+                var equipo = contexto.Equipo.Include("Integrantes").FirstOrDefault(x => x.Id == enEquipoId);
+                var nuevosIntegrantes = contexto.Usuario.Where(r => enIntegrantesIds.Contains(r.Id))
+                                                             .ToList();
                 equipo.Integrantes.Clear();
-                lista.ForEach(x => equipo.Integrantes.Add(x));
-
-                db.SaveChanges();
-
+                nuevosIntegrantes.ForEach(x => equipo.Integrantes.Add(x));
+                contexto.SaveChanges();
             };
         }
-        
+
         public void EliminarEquipo(int enEquipoId)
         {
             using (var contexto = new QuePedimosContext())
@@ -92,13 +98,14 @@ namespace DAL.DAO
                 contexto.SaveChanges();
             };
         }
-        public List<Usuario> ListarUsuarios(int[] enListaIntegrantesId)
-        {
-            using (var contexto = new QuePedimosContext())
-            {
-                return contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
-                                        .ToList();
-            }
-        }
+        //public List<Usuario> ListarUsuarios(int[] enListaIntegrantesId)
+        //{
+        //    using (var contexto = new QuePedimosContext())
+        //    {
+        //        var lista = contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
+        //                                .ToList();
+        //        return lista;
+        //    }
+        //}
     }
 }

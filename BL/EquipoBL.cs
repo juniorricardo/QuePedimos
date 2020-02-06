@@ -17,10 +17,10 @@ namespace BL
         {
             return equipoDao.ListarEquipos();
         }
-        public List<Usuario> ListarIntegranteEquipo(int enEquipoId)
-        {
-            return equipoDao.ListarIntegrantesEquipo(enEquipoId);
-        }
+        //public List<Usuario> ListarIntegranteEquipo(int enEquipoId)
+        //{
+        //    return equipoDao.ListarIntegrantesEquipo(enEquipoId);
+        //}
 
         public Equipo BuscarEquipoPorId(int? enEquipoId)
         {

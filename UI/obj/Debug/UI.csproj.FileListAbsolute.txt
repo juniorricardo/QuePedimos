@@ -313,6 +313,7 @@ C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\roslyn\VBCSCompiler.exe.co
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Antlr3.Runtime.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BE.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BL.dll
+C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\EntityFramework.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\EntityFramework.SqlServer.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Microsoft.AspNet.Identity.Core.dll
@@ -339,11 +340,12 @@ C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\System.Web.WebPages.Deploy
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\System.Web.WebPages.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\System.Web.WebPages.Razor.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\WebGrease.dll
-C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BE.pdb
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BE.dll.config
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BL.pdb
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\BL.dll.config
+C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.pdb
+C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.dll.config
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\EntityFramework.xml
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\EntityFramework.SqlServer.xml
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\System.Web.Helpers.xml
@@ -368,8 +370,6 @@ C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Microsoft.Owin.Security.Tw
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.pdb
-C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\DAL.dll.config
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\es\System.Web.Helpers.resources.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\es\System.Web.Mvc.resources.dll
 C:\Users\jrhuamani\Documents\miRepo\QuePedimos\UI\bin\es\System.Web.Optimization.resources.dll

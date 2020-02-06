@@ -13,10 +13,10 @@
 <table class="table">
     <tr>
         <th>
-            <label>Lider de equipo</label>
+            @Html.DisplayNameFor(model => model.Lider)
         </th>
         <th>
-            <label>Integrantes</label>
+            @Html.DisplayNameFor(model => model.Integrantes)
         </th>
         <th>
             <label>Sorteo</label>
@@ -24,12 +24,6 @@
         <th>
             @Html.DisplayNameFor(model => model.FechaCreado)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.FechaCreado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaUltimaModificacion)
-            </th>*@
     </tr>
 
     @foreach (var item in Model)

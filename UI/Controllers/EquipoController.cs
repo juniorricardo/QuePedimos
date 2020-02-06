@@ -25,7 +25,7 @@ namespace UI.Controllers
             // The ObjectContext instance has been disposed and can no longer be used for operations that require a connection.'
             // en el model para listar integrantes de un equipo, no tiene acceso a la lista de los integrantes  
             var listaEquipos = equipoBL.ListaEquipos();
-            return View(db.Equipo.ToList());
+            return View(listaEquipos);
         }
 
         // GET: NuevoEquipo/Details/5
@@ -40,7 +40,7 @@ namespace UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listaIntegrantes = equipoBL.ListarIntegranteEquipo((int)id);
+            ViewBag.listaIntegrantes = equipo.Integrantes;
             return View(equipo);
         }
 

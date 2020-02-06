@@ -17,10 +17,6 @@ namespace BL
         {
             return equipoDao.ListarEquipos();
         }
-        //public List<Usuario> ListarIntegranteEquipo(int enEquipoId)
-        //{
-        //    return equipoDao.ListarIntegrantesEquipo(enEquipoId);
-        //}
 
         public Equipo BuscarEquipoPorId(int? enEquipoId)
         {
@@ -34,7 +30,6 @@ namespace BL
 
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
-            //equipoDao.ActualizarEquipo(enEquipo);
             equipoDao.ActualizarEquipo(enEquipoId, enIntegrantesIds);
         }
 

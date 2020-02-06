@@ -23,7 +23,7 @@
         </dt>
         <dd>
             <ul class="list-group list-group-flush">
-                @foreach (var integrante in ViewBag.listaIntegrantes)
+                @foreach (var integrante in Model.Integrantes)
                 {
                     <li class="list-group-item">@integrante.NombreApellido  </li>
                 }

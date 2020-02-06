@@ -19,32 +19,6 @@ namespace DAL.DAO
                 return lista;
             };
         }
-        //public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
-        //{
-        //    using (var contexto = new QuePedimosContext())
-        //    {
-        //        return contexto.Equipo.Find(enEquipoId).Integrantes.ToList();
-        //    };
-        //}
-
-        //public List<Usuario> ListarIntegrantesEquipo(int enEquipoId)
-        //{
-        //    using (var contexto = new QuePedimosContext())
-        //    {
-        //        /*  
-        //         *  return (from empleado in entities.empleado
-        //                    join his_estructura in entities.his_estructura on empleado.ternro equals his_estructura.ternro
-        //                    join estructura in entities.estructura on his_estructura.estrnro equals estructura.estrnro
-        //                    where empleado.empest == -1 && estructura.tenro == 101 && contiene.Contains(empleado.empreporta) && his_estructura.htethasta == null && estructura.estrnro != 2268
-        //                    select new Cliente { codigo = estructura.estrnro.ToString(), descripcion = estructura.estrdabr }).Distinct().ToList();
-
-        //         */
-        //        return (from usuario in contexto.Usuario
-        //                join instancia in contexto.UsuarioEquipo on usuario.Id equals instancia.UsuarioId
-        //                where instancia.EquipoId == enEquipoId
-        //                select usuario).ToList();
-        //    };
-        //}
 
         public Equipo BuscarEquipoPorId(int? enEquipoId)
         {
@@ -73,12 +47,10 @@ namespace DAL.DAO
             };
         }
 
-
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
             using (var contexto = new QuePedimosContext())
             {
-                //  Traer el objeto y actualizar los integrantes, antes limpiar el contenido de ellos
                 var equipo = contexto.Equipo.Include("Integrantes").FirstOrDefault(x => x.Id == enEquipoId);
                 var nuevosIntegrantes = contexto.Usuario.Where(r => enIntegrantesIds.Contains(r.Id))
                                                              .ToList();
@@ -98,14 +70,5 @@ namespace DAL.DAO
                 contexto.SaveChanges();
             };
         }
-        //public List<Usuario> ListarUsuarios(int[] enListaIntegrantesId)
-        //{
-        //    using (var contexto = new QuePedimosContext())
-        //    {
-        //        var lista = contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
-        //                                .ToList();
-        //        return lista;
-        //    }
-        //}
     }
 }

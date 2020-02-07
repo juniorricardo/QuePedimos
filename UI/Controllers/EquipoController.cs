@@ -14,13 +14,18 @@ namespace UI.Controllers
 {
     public class EquipoController : Controller
     {
-        private QuePedimosContext db = new QuePedimosContext();
         private EquipoBL equipoBL = new EquipoBL();
         private UsuarioBL usuarioBL = new UsuarioBL();
+        private PedidoBL pedidoBL = new PedidoBL();
 
         // GET: NuevoEquipo
         public ActionResult Index()
         {
+
+            /*
+             Generar registro en 'Pedido' en Home
+             */
+            ViewBag.Pedidos = pedidoBL.ListarPedidos();
             return View(equipoBL.ListaEquipos());
         }
 

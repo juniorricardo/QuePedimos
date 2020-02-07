@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ComidaBL.cs" />
     <Compile Include="EquipoBL.cs" />
+    <Compile Include="PedidoBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioBL.cs" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿@model BE.Equipo
-
+﻿@model List<BE.Usuario>
 @{
     ViewBag.Title = "Crear equipo";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +21,7 @@
             <label class="control-label col-md-2">Integrantes</label>
 
             <div class="col-md-10">
-                @Html.DropDownList("Empleados", new SelectList(ViewBag.listaUsuarios, "Id", "NombreApellido"),
+                @Html.DropDownList("Empleados", new SelectList(Model, "Id", "NombreApellido"),
                                                new
                                                {
                                                    @class = "form-control chosen-select",

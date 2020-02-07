@@ -40,8 +40,15 @@ namespace DAL.DAO
                     FechaCreado = DateTime.Now,
                     FechaUltimaModificacion = DateTime.Now
                 };
-
                 contexto.Equipo.Add(equipo);
+                var rand = new Random();
+                contexto.Pedido.Add(new Pedido()
+                {
+                    DiaPedido = DateTime.Today.AddDays(1),
+                    Equipo = equipo,
+                    Usuario = equipo.Integrantes.ToList().ElementAt(rand.Next(equipo.Integrantes.Count)),
+                    Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count())),
+                });
 
                 contexto.SaveChanges();
             };

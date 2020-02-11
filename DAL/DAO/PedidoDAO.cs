@@ -16,11 +16,29 @@ namespace DAL.DAO
             }
         }
 
-        public List<Pedido> ListarPedidos()
+        public List<PedidoResumen> ListarPedidos()
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Pedido.ToList();
+                // tipos anonimos
+                //  Seleccionar varias columnas y utilizando un tipo 'anonimo'
+                // var listaAnonima = db.Persona.Select(x => new { Nombre = x.Nombre, Edad = x.Edad }).ToList();
+                //var pedido = contexto.Pedido.Select(x => new Pedido()
+                //{
+                //    NombreUsuario = x.Usuario.NombreApellido,
+                //    Comida = x.Comida.Nombre
+                //}).ToList();
+
+                var listaPedido = contexto.Pedido.Select(x => new PedidoResumen()
+                {
+                    EquipoId = x.EquipoId,
+                    Nombre = x.Usuario.Nombre,
+                    Apellido = x.Usuario.Apellido,
+                    Comida = x.Comida.Nombre,
+                    Dia = x.DiaPedido
+                }).ToList();
+
+                return listaPedido;
             }
         }
     }

@@ -15,7 +15,7 @@ namespace BE
 
         //public string[] IntegrantesIds { get; set; }
 
-        public virtual ICollection<Usuario> Integrantes { get; set; }
+        public ICollection<Usuario> Integrantes { get; set; }
         public Equipo()
         {
             this.Integrantes = new HashSet<Usuario>();

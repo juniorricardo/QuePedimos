@@ -26,7 +26,7 @@ namespace BE
 
         public string NombreApellido { get { return string.Format("{0} {1}", Nombre, Apellido);  } }
 
-        public virtual ICollection<Equipo> Equipos { get; set; }
+        public ICollection<Equipo> Equipos { get; set; }
         public Usuario()
         {
             this.Equipos = new HashSet<Equipo>();

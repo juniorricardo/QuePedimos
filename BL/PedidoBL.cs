@@ -16,7 +16,7 @@ namespace BL
         {
             pedidoDao.VerificarPedidos();
         }
-        public List<Pedido> ListarPedidos()
+        public List<PedidoResumen> ListarPedidos()
         {
             return pedidoDao.ListarPedidos();
         }

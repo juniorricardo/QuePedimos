@@ -21,7 +21,6 @@ namespace UI.Controllers
         // GET: NuevoEquipo
         public ActionResult Index()
         {
-
             /*
              Generar registro en 'Pedido' en Home
              */

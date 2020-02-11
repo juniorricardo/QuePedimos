@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BE.Equipo>
+@using BE;
 
 @{
     ViewBag.Title = "Equipo";
@@ -39,12 +40,14 @@
                 </ul>
             </td>
             <th>
-                <label>
+                <div>
                     @{ 
-                        var sorteo = ViewBag.Pedidos;
-                        sorteo.
+                        var pedido = (ViewBag.Pedidos as IEnumerable<PedidoResumen>).FirstOrDefault(h => h.EquipoId == item.Id);
                     }
-                </label>
+                    <p>Sorteado: @pedido.Nombre @pedido.Apellido</p>
+                    <p>Comida: @pedido.Comida</p>
+                    <p>Dia: @pedido.Dia.ToString("MM-dd")</p>
+                </div>
             </th>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaCreado)

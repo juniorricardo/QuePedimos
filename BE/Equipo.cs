@@ -16,9 +16,11 @@ namespace BE
         //public string[] IntegrantesIds { get; set; }
 
         public ICollection<Usuario> Integrantes { get; set; }
+        public ICollection<Comida> Comidas{ get; set; }
         public Equipo()
         {
             this.Integrantes = new HashSet<Usuario>();
+            this.Comidas = new HashSet<Comida>();
         }
 
     }

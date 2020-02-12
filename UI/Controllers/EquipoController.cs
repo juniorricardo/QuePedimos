@@ -24,6 +24,18 @@ namespace UI.Controllers
             /*
              Generar registro en 'Pedido' en Home
              */
+
+            //var diaHabil = DateTime.Now.AddDays(3);
+            //int dia = 0;
+            //while (diaHabil.AddDays(dia).DayOfWeek.Equals(DayOfWeek.Saturday) ||
+            //       diaHabil.AddDays(dia).DayOfWeek.Equals(DayOfWeek.Sunday))
+            //{
+            //    Console.WriteLine("finde");
+            //    dia++;
+            //}
+            //Console.WriteLine(diaHabil.ToString("dddd, dd MMMM"));
+
+
             ViewBag.Pedidos = pedidoBL.ListarPedidos();
             return View(equipoBL.ListaEquipos());
         }

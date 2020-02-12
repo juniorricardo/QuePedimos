@@ -9,57 +9,69 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Crear equipo", "Create", "Equipo",new { @class = "btn btn-primary" })
+    @Html.ActionLink("Crear equipo", "Create", "Equipo", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Lider)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Integrantes)
-        </th>
-        <th>
-            <label>Sorteo</label>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreado)
-        </th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Lider)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Integrantes)
+            </th>
+            <th>
+                <label>Sorteo</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreado)
+            </th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lider.NombreApellido)
-            </td>
-            <td>
-                <ul class="list-group list-group-flush">
-                    @foreach (var integrante in item.Integrantes)
-                    {   <li class="list-group-item">@integrante.NombreApellido  </li>   }
-                </ul>
-            </td>
-            <th>
-                <div>
-                    @{ 
-                        var pedido = (ViewBag.Pedidos as IEnumerable<PedidoResumen>).FirstOrDefault(h => h.EquipoId == item.Id);
-                    }
-                    <p>Sorteado: @pedido.Nombre @pedido.Apellido</p>
-                    <p>Comida: @pedido.Comida</p>
-                    <p>Dia: @pedido.Dia.ToString("MM-dd")</p>
-                </div>
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCreado)
-            </td>
-            <td>
-                <div class="btn-group" role="group">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </div>
-            </td>
-        </tr>
+        <tbody>
+            <tr>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Lider.NombreApellido)
+                </td>
+                <td>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var integrante in item.Integrantes)
+                        {
+                            <li class="list-group-item">@integrante.NombreApellido  </li>
+                        }
+                    </ul>
+                </td>
+                <th>
+                    <div>
+                        @{
+                            var pedido = (ViewBag.Pedidos as IEnumerable<PedidoResumen>).FirstOrDefault(h => h.EquipoId == item.Id);
+                        }
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Sorteado: @pedido.Nombre @pedido.Apellido
+                            </li>
+                            <li class="list-group-item">
+                                Comida: @pedido.Comida
+                            </li>
+                            <li class="list-group-item">Dia: @pedido.Dia.ToString("dddd, dd MMMM")</li>
+                        </ul>
+                    </div>
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCreado)
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </td>
+            </tr>
+        </tbody>
     }
 
 </table>

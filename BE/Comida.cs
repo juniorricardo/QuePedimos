@@ -39,5 +39,10 @@ namespace BE
         [Required]
         [StringLength(25)]
         public string Nombre { get; set; }
+        public ICollection<Equipo> Equipos { get; set; }
+        public Comida()
+        {
+            this.Equipos = new HashSet<Equipo>();
+        }
     }
 }

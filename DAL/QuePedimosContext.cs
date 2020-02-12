@@ -18,19 +18,31 @@ namespace DAL
         public DbSet<Equipo> Equipo { get; set; }
         public DbSet<Comida> Comida { get; set; }
         public DbSet<Pedido> Pedido { get; set; }
-        //public DbSet<UsuarioEquipo> UsuarioEquipo { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             base.Configuration.LazyLoadingEnabled = false;
+            /* Relacion Many to Many
+                Equipo y Usuario    */
             modelBuilder.Entity<Usuario>()
-                        .HasMany(u => u.Equipos)
-                        .WithMany(e => e.Integrantes)
-                        .Map(eu =>
+                            .HasMany(u => u.Equipos)
+                            .WithMany(e => e.Integrantes)
+                            .Map(eu =>
                                 {
                                     eu.MapLeftKey("IntegranteId");
                                     eu.MapRightKey("EquipoId");
                                     eu.ToTable("UsuarioEquipo");
+                                });
+            /* Relacion Many To Many
+                 Equipo y Comida */
+            modelBuilder.Entity<Equipo>()
+                            .HasMany(e => e.Comidas)
+                            .WithMany(c => c.Equipos)
+                            .Map(ce =>
+                                {
+                                    ce.MapLeftKey("ComidaId");
+                                    ce.MapRightKey("EquipoId");
+                                    ce.ToTable("ComidaEquipo");
                                 });
         }
     }

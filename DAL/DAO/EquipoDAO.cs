@@ -33,6 +33,7 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
+                var rand = new Random();
                 var equipo = new Equipo()
                 {
                     Integrantes = contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
@@ -41,13 +42,16 @@ namespace DAL.DAO
                     FechaUltimaModificacion = DateTime.Now
                 };
                 contexto.Equipo.Add(equipo);
-                var rand = new Random();
+                var usuarioSorteado = equipo.Integrantes.ToList()
+                                                        .Where(x => x.EstaDisponible == true)
+                                                        .ElementAt(rand.Next(equipo.Integrantes.Count));
+                usuarioSorteado.EstaDisponible = false;
                 contexto.Pedido.Add(new Pedido()
                 {
                     DiaPedido = DateTime.Today.AddDays(1),
                     Equipo = equipo,
-                    Usuario = equipo.Integrantes.ToList().ElementAt(rand.Next(equipo.Integrantes.Count)),
-                    Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count())),
+                    Usuario = usuarioSorteado,
+                    Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count()))
                 });
 
                 contexto.SaveChanges();

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.DAO
 {
@@ -13,6 +11,30 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
+                var rand = new Random();
+                // obtener el ultimo registro de EquipoX y verificar la fecha
+                var listaPedidos = contexto.Pedido.ToList();
+                for (int indice = 0; indice < listaPedidos.Count; indice++)
+                {
+                    var equipoActual = (Equipo)contexto.Equipo.Include("Integrantes")
+                                                              .FirstOrDefault(x => (x.Id == listaPedidos[indice].EquipoId));
+
+                    var usuarioSorteado = equipoActual.Integrantes.ToList()
+                                                      .Where(x => x.EstaDisponible == true)
+                                                      .ElementAt(rand.Next(equipoActual.Integrantes.Count));
+                    usuarioSorteado.EstaDisponible = false;
+                    if (NeedUpdate(listaPedidos[indice].DiaPedido))
+                    {
+                        var nuevoPedido = new Pedido()
+                        {
+                            Usuario = usuarioSorteado,
+                            Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count())),
+                            DiaPedido = UpdateDate(listaPedidos[indice].DiaPedido),
+                            Equipo = equipoActual
+                        };
+                    }
+                }
+                contexto.SaveChanges();
             }
         }
 
@@ -20,14 +42,6 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-                // tipos anonimos
-                //  Seleccionar varias columnas y utilizando un tipo 'anonimo'
-                // var listaAnonima = db.Persona.Select(x => new { Nombre = x.Nombre, Edad = x.Edad }).ToList();
-                //var pedido = contexto.Pedido.Select(x => new Pedido()
-                //{
-                //    NombreUsuario = x.Usuario.NombreApellido,
-                //    Comida = x.Comida.Nombre
-                //}).ToList();
 
                 var listaPedido = contexto.Pedido.Select(x => new PedidoResumen()
                 {
@@ -41,5 +55,35 @@ namespace DAL.DAO
                 return listaPedido;
             }
         }
+
+        #region Util
+        // Verifica si el pedido tiene la fecha actualizada
+        // no debe de ser el mismo dia de hoy
+        private DateTime UpdateDate(DateTime lastDayRecord)
+        {
+            var toDay = DateTime.Today;
+            return (lastDayRecord.Month == toDay.Month &&
+                    lastDayRecord.Day == toDay.Day) ? NextDay() : lastDayRecord;
+        }
+        // Retorna el proximo dia habil
+        private DateTime NextDay()
+        {
+            int days = 0;
+            DateTime tomorrow = DateTime.Today.AddDays(1);
+            while ((int)tomorrow.AddDays(days).DayOfWeek == 6 ||
+                        tomorrow.AddDays(days).DayOfWeek == 0)
+            {
+                days += 1;
+            }
+            return tomorrow.AddDays(days);
+        }
+        private bool NeedUpdate(DateTime day)
+        {
+            var toDay = DateTime.Today;
+            return (day.Month == toDay.Month &&
+                    day.Day == toDay.Day);
+        }
+        #endregion
+
     }
 }

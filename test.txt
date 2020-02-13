@@ -1,0 +1,27 @@
+detalles	Ok
+editar	Listar integrantes y agregar o modificarlos
+crear	Listar tabla usuarios, setear lider y guardar
+
+eliminar	Ok
+
+
+Al crear el equipo, se realiza una query, retornando una lista de dichos usuarios
+el problema de esto es que luego de retornar la lista, el context deja de existir y entity
+considera a los integrantes de esa lista como un nuevo registro.
+
+Listar integrantes de equipo, 'Include' permite recuperar la lista de los usuarios y agregalo
+al objeto, propiedad 'Integrantes'
+
+
+EquipoDAO
+	validad proximo dia
+	sorteo de comida, debe de ser de la lista de comida de ese mismo equipo
+
+
+Se repite codigo en EquipoDao y PedidoDao
+delegar la tarea de .bat .batch
+
+
+
+Many to Many | Create and Edit same page
+https://www.youtube.com/watch?v=ealdzjRx-Jo

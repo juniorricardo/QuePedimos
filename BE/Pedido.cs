@@ -9,6 +9,7 @@ namespace BE
     [Table("Pedido")]
     public class Pedido
     {
+
         #region Constructores
         public Pedido(Equipo enEquipo,
                       Usuario enUsuario, 
@@ -45,5 +46,6 @@ namespace BE
         #endregion
 
         public DateTime DiaPedido { get; set; }
+
     }
 }

@@ -17,9 +17,19 @@ EquipoDAO
 	validad proximo dia
 	sorteo de comida, debe de ser de la lista de comida de ese mismo equipo
 
-
+**Testeando PedidoDAO verificarPedidos()
+ERROR 
+	al crear equipo, el random de la comida se realiza con toda la tabla de comida
 Se repite codigo en EquipoDao y PedidoDao
 delegar la tarea de .bat .batch
+
+
+/****** Usuario del equipo 1 ******/
+SELECT *
+FROM Usuario
+inner join UsuarioEquipo
+on UsuarioEquipo.IntegranteId = Usuario.Id
+where UsuarioEquipo.EquipoId = 1
 
 
 

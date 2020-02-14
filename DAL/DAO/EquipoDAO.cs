@@ -29,7 +29,7 @@ namespace DAL.DAO
             };
         }
 
-        public void AgregarEquipo(int[] enListaIntegrantesId)
+        public void AgregarEquipo(int[] enListaIntegrantesId, int[] enListaComidasIds)
         {
             using (var contexto = new QuePedimosContext())
             {
@@ -37,7 +37,9 @@ namespace DAL.DAO
                 var equipo = new Equipo()
                 {
                     Integrantes = contexto.Usuario.Where(r => enListaIntegrantesId.Contains(r.Id))
-                                                             .ToList(),
+                                                  .ToList(),
+                    Comidas = contexto.Comida.Where(s => enListaComidasIds.Contains(s.Id))
+                                             .ToList(),
                     FechaCreado = DateTime.Now,
                     FechaUltimaModificacion = DateTime.Now
                 };
@@ -51,9 +53,12 @@ namespace DAL.DAO
                     DiaPedido = DateTime.Today.AddDays(1),
                     Equipo = equipo,
                     Usuario = usuarioSorteado,
-                    Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count()))
-                });
-
+                    Comida = contexto.Comida.Where(r=>enListaComidasIds
+                                            .Contains(r.Id))
+                                            .ToList()
+                                            .ElementAt(rand.Next(equipo.Comidas.Count))
+                    //Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count()))
+                }) ;
                 contexto.SaveChanges();
             };
         }

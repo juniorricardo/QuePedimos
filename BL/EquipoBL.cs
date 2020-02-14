@@ -23,9 +23,9 @@ namespace BL
             return equipoDao.BuscarEquipoPorId(enEquipoId);
         }
 
-        public void AgregarEquipo(int[] enListaIntegrantesIds)
+        public void AgregarEquipo(int[] enListaIntegrantesIds , int[] enListaComidasIds)
         {
-            equipoDao.AgregarEquipo(enListaIntegrantesIds);
+            equipoDao.AgregarEquipo(enListaIntegrantesIds,enListaComidasIds);
         }
 
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)

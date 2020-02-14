@@ -17,12 +17,13 @@ namespace UI.Controllers
         private EquipoBL equipoBL = new EquipoBL();
         private UsuarioBL usuarioBL = new UsuarioBL();
         private PedidoBL pedidoBL = new PedidoBL();
+        private ComidaBL comidaBL = new ComidaBL();
 
         // GET: NuevoEquipo
         public ActionResult Index()
         {
             /*
-             Generar registro en 'Pedido' en Home
+             Generar registro en 'Pedido' 
              */
 
 
@@ -48,6 +49,7 @@ namespace UI.Controllers
         // GET: NuevoEquipo/Create
         public ActionResult Create()
         {
+            ViewBag.ListaComidas = comidaBL.ListaComidas();
             return View(usuarioBL.ListaUsuarios());
         }
 
@@ -56,11 +58,11 @@ namespace UI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Empleados")]int[] Empleados)
+        public ActionResult Create([Bind(Include = "Empleados,Comidas")]int[] Empleados, int[] Comidas)
         {
             if (ModelState.IsValid)
             {
-                equipoBL.AgregarEquipo(Empleados);
+                equipoBL.AgregarEquipo(Empleados , Comidas);
                 return RedirectToAction("Index");
             }
             return View();

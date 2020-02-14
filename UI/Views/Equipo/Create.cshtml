@@ -29,6 +29,18 @@
                                                })
             </div>
         </div>
+        <label>Comidas</label>
+        <div class="form-group">
+            <label class="control-label col-md-2">Seleccione las comidas</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Comidas", new SelectList(ViewBag.ListaComidas, "Id", "Nombre"),
+                                               new
+                                               {
+                                                   @class = "form-control chosen-select",
+                                                   @multiple = true
+                                               })
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

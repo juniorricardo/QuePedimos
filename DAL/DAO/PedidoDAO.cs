@@ -12,29 +12,57 @@ namespace DAL.DAO
             using (var contexto = new QuePedimosContext())
             {
                 var rand = new Random();
-                // obtener el ultimo registro de EquipoX y verificar la fecha
                 var listaPedidos = contexto.Pedido.ToList();
-                for (int indice = 0; indice < listaPedidos.Count; indice++)
+                foreach (var pedido in listaPedidos)
                 {
-                    var equipoActual = (Equipo)contexto.Equipo.Include("Integrantes")
-                                                              .FirstOrDefault(x => (x.Id == listaPedidos[indice].EquipoId));
-
-                    var usuarioSorteado = equipoActual.Integrantes.ToList()
-                                                      .Where(x => x.EstaDisponible == true)
-                                                      .ElementAt(rand.Next(equipoActual.Integrantes.Count));
-                    usuarioSorteado.EstaDisponible = false;
-                    if (NeedUpdate(listaPedidos[indice].DiaPedido))
+                    if (NeedUpdate(pedido.DiaPedido))
                     {
-                        var nuevoPedido = new Pedido()
+                        contexto.Pedido.Add(new Pedido()
                         {
-                            Usuario = usuarioSorteado,
-                            Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count())),
-                            DiaPedido = UpdateDate(listaPedidos[indice].DiaPedido),
-                            Equipo = equipoActual
-                        };
+                            UsuarioId = SeleccionarUsuarioAleatorio(pedido.EquipoId),
+                            EquipoId = pedido.EquipoId,
+                            ComidaId = SeleccionarComidaAleatorio(pedido.EquipoId),
+                            DiaPedido = NextDay()
+                        });
                     }
                 }
                 contexto.SaveChanges();
+            }
+        }
+
+        private int SeleccionarComidaAleatorio(int equipoId)
+        {
+            using (var contexto = new QuePedimosContext())
+            {
+                var rand = new Random();
+                var equipo= contexto.Equipo.Include("Comidas")
+                                            .FirstOrDefault(x => x.Id == equipoId);
+                var comida = equipo.Comidas.ToList()
+                                           .ElementAt(rand.Next(equipo.Comidas.Count));
+                return comida.Id;
+            }
+        }
+
+        /*  SeleccionarUsuarioAleatorio, retorna un usuario de manera aleatoria
+            del equipo ('equipoId' corresponde al Id del dicho equipo), donde 
+            el integrante se encuentra disponible       */
+        private int SeleccionarUsuarioAleatorio(int equipoId)
+        {
+            using (var contexto = new QuePedimosContext())
+            {
+                var rand = new Random();
+                var equipo = contexto.Equipo.Include("Integrantes")
+                               .FirstOrDefault(x => x.Id == equipoId);
+                var usuario = equipo.Integrantes.ToList()
+                                                .Where(x => x.EstaDisponible == true)
+                                                .ElementAt(rand.Next(equipo.Integrantes.Count));
+                usuario.EstaDisponible = false;
+
+                contexto.Usuario.Attach(usuario);
+                contexto.Entry(usuario).Property(x => x.EstaDisponible).IsModified = true;
+                contexto.SaveChanges();
+
+                return usuario.Id;
             }
         }
 
@@ -57,14 +85,7 @@ namespace DAL.DAO
         }
 
         #region Util
-        // Verifica si el pedido tiene la fecha actualizada
-        // no debe de ser el mismo dia de hoy
-        private DateTime UpdateDate(DateTime lastDayRecord)
-        {
-            var toDay = DateTime.Today;
-            return (lastDayRecord.Month == toDay.Month &&
-                    lastDayRecord.Day == toDay.Day) ? NextDay() : lastDayRecord;
-        }
+      
         // Retorna el proximo dia habil
         private DateTime NextDay()
         {
@@ -81,7 +102,7 @@ namespace DAL.DAO
         {
             var toDay = DateTime.Today;
             return (day.Month == toDay.Month &&
-                    day.Day == toDay.Day);
+                    day.Day <= toDay.Day);
         }
         #endregion
 

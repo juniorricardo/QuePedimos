@@ -14,24 +14,25 @@ al objeto, propiedad 'Integrantes'
 
 
 EquipoDAO
-	validad proximo dia
-	sorteo de comida, debe de ser de la lista de comida de ese mismo equipo
+	validad proximo dia		OK
+	sorteo de comida, debe de ser de la lista de comida de ese mismo equipo	OK
 
 **Testeando PedidoDAO verificarPedidos()
 ERROR 
-	al crear equipo, el random de la comida se realiza con toda la tabla de comida
+	-al crear equipo, el random de la comida se realiza con toda la tabla de comida	OK
+	-Validar mes, a la hora de comparar dias
+	-tabla ComidaEquipo, id comida swap id equipo 	OK	
+	
+
+
 Se repite codigo en EquipoDao y PedidoDao
 delegar la tarea de .bat .batch
 
-
-/****** Usuario del equipo 1 ******/
-SELECT *
-FROM Usuario
-inner join UsuarioEquipo
-on UsuarioEquipo.IntegranteId = Usuario.Id
-where UsuarioEquipo.EquipoId = 1
-
-
+Pruebas:
+	CRUD:
+		Comida
+		Usuario
+		Equipo
 
 Many to Many | Create and Edit same page
 https://www.youtube.com/watch?v=ealdzjRx-Jo

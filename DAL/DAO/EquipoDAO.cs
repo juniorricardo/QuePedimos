@@ -53,18 +53,22 @@ namespace DAL.DAO
                     DiaPedido = DateTime.Today.AddDays(1),
                     Equipo = equipo,
                     Usuario = usuarioSorteado,
-                    Comida = contexto.Comida.Where(r=>enListaComidasIds
-                                            .Contains(r.Id))
+                    Comida = contexto.Comida.Where(r => enListaComidasIds.Contains(r.Id))
                                             .ToList()
                                             .ElementAt(rand.Next(equipo.Comidas.Count))
-                    //Comida = contexto.Comida.ToList().ElementAt(rand.Next(contexto.Comida.Count()))
-                }) ;
+                });
                 contexto.SaveChanges();
             };
         }
 
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
         {
+            /*
+             * F:
+             *  Validar registro, si el usuario sorteado es removido del equipo, se debe realizar un 
+             *  nuevo sorteo con los nuevos integrantes, ademas se tiene que devolver el estado del
+             *  usuario removido a 'TRUE' disponible
+             */
             using (var contexto = new QuePedimosContext())
             {
                 var equipo = contexto.Equipo.Include("Integrantes").FirstOrDefault(x => x.Id == enEquipoId);

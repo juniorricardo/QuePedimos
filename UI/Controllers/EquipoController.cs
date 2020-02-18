@@ -26,7 +26,6 @@ namespace UI.Controllers
              Generar registro en 'Pedido' 
              */
 
-
             ViewBag.Pedidos = pedidoBL.ListarPedidos();
             return View(equipoBL.ListaEquipos());
         }

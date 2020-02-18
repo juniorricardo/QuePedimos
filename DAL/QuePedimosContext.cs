@@ -35,9 +35,9 @@ namespace DAL
                                 });
             /* Relacion Many To Many
                  Equipo y Comida */
-            modelBuilder.Entity<Equipo>()
-                            .HasMany(e => e.Comidas)
-                            .WithMany(c => c.Equipos)
+            modelBuilder.Entity<Comida>()
+                            .HasMany(e => e.Equipos)
+                            .WithMany(c => c.Comidas)
                             .Map(ce =>
                                 {
                                     ce.MapLeftKey("ComidaId");

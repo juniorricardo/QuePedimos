@@ -7,35 +7,51 @@ namespace DAL.DAO
 {
     public class PedidoDAO
     {
+        /**
+         *  Verifica en que 'DiaPedido' este actulizado, de no ser asi
+         *  este llamara a metodos que permitar realizar dicha actualizacion
+         */
         public void VerificarPedidos()
         {
             using (var contexto = new QuePedimosContext())
             {
+                /*
+                 * F:
+                 *  Verificar si existe un registro de cada equipo
+                 */
                 var rand = new Random();
-                var listaPedidos = contexto.Pedido.ToList();
-                foreach (var pedido in listaPedidos)
+                //var listaPedidos = contexto.Pedido.ToList().GroupBy(x => x.EquipoId).LastOrDefault();
+                // Obtiene el listado del ultimo pedido de cada equipo
+                var listaPedidoEquipos = contexto.Pedido.GroupBy(x => x.EquipoId)
+                                                  .Select(x => x.OrderByDescending(i => i.Id)
+                                                                  .FirstOrDefault())
+                                                  .ToList();
+                
+                foreach (var pedido in listaPedidoEquipos)
                 {
-                    if (NeedUpdate(pedido.DiaPedido))
+                    if (NecesitaActulizarDiaPedido(pedido.DiaPedido))
                     {
                         contexto.Pedido.Add(new Pedido()
                         {
                             UsuarioId = SeleccionarUsuarioAleatorio(pedido.EquipoId),
                             EquipoId = pedido.EquipoId,
                             ComidaId = SeleccionarComidaAleatorio(pedido.EquipoId),
-                            DiaPedido = NextDay()
+                            DiaPedido = ObtenerProximoDia()
                         });
                     }
                 }
                 contexto.SaveChanges();
             }
         }
-
+        /**
+         * Selecciona el ID de una comida del equipo aleatoria
+         */
         private int SeleccionarComidaAleatorio(int equipoId)
         {
             using (var contexto = new QuePedimosContext())
             {
                 var rand = new Random();
-                var equipo= contexto.Equipo.Include("Comidas")
+                var equipo = contexto.Equipo.Include("Comidas")
                                             .FirstOrDefault(x => x.Id == equipoId);
                 var comida = equipo.Comidas.ToList()
                                            .ElementAt(rand.Next(equipo.Comidas.Count));
@@ -43,19 +59,28 @@ namespace DAL.DAO
             }
         }
 
-        /*  SeleccionarUsuarioAleatorio, retorna un usuario de manera aleatoria
-            del equipo ('equipoId' corresponde al Id del dicho equipo), donde 
-            el integrante se encuentra disponible       */
+        /**
+         * Permite seleccionar el Id de un integrante del equipo de
+         * manera aleatoria
+         */
         private int SeleccionarUsuarioAleatorio(int equipoId)
         {
             using (var contexto = new QuePedimosContext())
             {
+                /*
+                 * F:
+                 *  Validar cantidad de integrantes disponibles, y reiniciar cuando todos ellos 
+                 *  ya no se encuentren disponibles.
+                 */
                 var rand = new Random();
-                var equipo = contexto.Equipo.Include("Integrantes")
-                               .FirstOrDefault(x => x.Id == equipoId);
-                var usuario = equipo.Integrantes.ToList()
-                                                .Where(x => x.EstaDisponible == true)
-                                                .ElementAt(rand.Next(equipo.Integrantes.Count));
+                var listaUsuariosDisponibles = contexto.Equipo.Include("Integrantes")
+                                                              .FirstOrDefault(x => x.Id == equipoId)
+                                                              .Integrantes
+                                                              .Where(x => x.EstaDisponible == true)
+                                                              .ToList();
+                //var listaUsuariosDisponibles = equipo.Integrantes.Where(x => x.EstaDisponible == true)
+                //                                                 .ToList();
+                var usuario = listaUsuariosDisponibles.ElementAt(rand.Next(listaUsuariosDisponibles.Count));
                 usuario.EstaDisponible = false;
 
                 contexto.Usuario.Attach(usuario);
@@ -70,39 +95,59 @@ namespace DAL.DAO
         {
             using (var contexto = new QuePedimosContext())
             {
-
-                var listaPedido = contexto.Pedido.Select(x => new PedidoResumen()
-                {
-                    EquipoId = x.EquipoId,
-                    Nombre = x.Usuario.Nombre,
-                    Apellido = x.Usuario.Apellido,
-                    Comida = x.Comida.Nombre,
-                    Dia = x.DiaPedido
-                }).ToList();
-
-                return listaPedido;
+                var listaEquipoIds = contexto.Equipo.Select(x => x.Id).ToList();
+                //List<PedidoResumen> listaPedido = new List<PedidoResumen>();
+                var demo = contexto.Pedido.GroupBy(g => g.EquipoId)
+                                          .Select(i => i.OrderByDescending(d => d.Id)
+                                                        .FirstOrDefault())
+                                          .Select(p => new PedidoResumen()
+                                          {
+                                              EquipoId = p.EquipoId,
+                                              Nombre = p.Usuario.Nombre,
+                                              Apellido = p.Usuario.Apellido,
+                                              Comida = p.Comida.Nombre,
+                                              Dia = p.DiaPedido
+                                          })
+                                          .ToList();
+                //foreach (var item in listaEquipoIds)
+                //{
+                    
+                //    var pedidoEquipo = contexto.Pedido.Where(x => x.EquipoId == item)
+                //                                      .Select(x => new PedidoResumen()
+                //                                      {
+                //                                          EquipoId = x.EquipoId,
+                //                                          Nombre = x.Usuario.Nombre,
+                //                                          Apellido = x.Usuario.Apellido,
+                //                                          Comida = x.Comida.Nombre,
+                //                                          Dia = x.DiaPedido
+                //                                      })
+                //                                      .ToList()
+                //                                      .LastOrDefault();
+                //    listaPedido.Add(pedidoEquipo);
+                //}
+                return demo;
             }
         }
 
         #region Util
-      
+
         // Retorna el proximo dia habil
-        private DateTime NextDay()
+        private DateTime ObtenerProximoDia()
         {
-            int days = 0;
-            DateTime tomorrow = DateTime.Today.AddDays(1);
-            while ((int)tomorrow.AddDays(days).DayOfWeek == 6 ||
-                        tomorrow.AddDays(days).DayOfWeek == 0)
+            int dias = 0;
+            DateTime manana = DateTime.Today.AddDays(1);
+            while ((int)manana.AddDays(dias).DayOfWeek == 6 ||
+                        manana.AddDays(dias).DayOfWeek == 0)
             {
-                days += 1;
+                dias += 1;
             }
-            return tomorrow.AddDays(days);
+            return manana.AddDays(dias);
         }
-        private bool NeedUpdate(DateTime day)
+        private bool NecesitaActulizarDiaPedido(DateTime enDia)
         {
-            var toDay = DateTime.Today;
-            return (day.Month == toDay.Month &&
-                    day.Day <= toDay.Day);
+            var hoy = DateTime.Today;
+            return (enDia.Month == hoy.Month &&
+                    enDia.Day <= hoy.Day);
         }
         #endregion
 

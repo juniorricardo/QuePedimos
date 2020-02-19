@@ -21,7 +21,7 @@ namespace UI.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("QuePedimosConnectionString", throwIfV1Schema: false)
         {
         }
 
@@ -30,6 +30,5 @@ namespace UI.Models
             return new ApplicationDbContext();
         }
 
-       public System.Data.Entity.DbSet<BE.Usuario> Usuarios { get; set; }
     }
 }

@@ -11,9 +11,8 @@ namespace DAL
     public class QuePedimosContext : DbContext
     {
         public QuePedimosContext()
-            : base("DAL.QuePedimosDB")
-        {
-        }
+            : base("name=QuePedimosConnectionString") { }
+
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Equipo> Equipo { get; set; }
         public DbSet<Comida> Comida { get; set; }

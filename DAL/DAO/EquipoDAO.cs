@@ -76,6 +76,7 @@ namespace DAL.DAO
                                                              .ToList();
                 equipo.Integrantes.Clear();
                 nuevosIntegrantes.ForEach(x => equipo.Integrantes.Add(x));
+                equipo.FechaUltimaModificacion = DateTime.Now;
                 contexto.SaveChanges();
             };
         }

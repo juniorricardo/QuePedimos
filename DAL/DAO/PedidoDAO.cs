@@ -80,6 +80,10 @@ namespace DAL.DAO
                                                               .ToList();
                 //var listaUsuariosDisponibles = equipo.Integrantes.Where(x => x.EstaDisponible == true)
                 //                                                 .ToList();
+
+                // Si lista de usuario es 1 seleecionar ese usuario
+                //  Si no (si) lista de usuarios es 0, reiniciar estado de disponibilidad de todos ellos
+                //   Si no, seleccionar con el random al nuevo usuario
                 var usuario = listaUsuariosDisponibles.ElementAt(rand.Next(listaUsuariosDisponibles.Count));
                 usuario.EstaDisponible = false;
 
@@ -109,9 +113,9 @@ namespace DAL.DAO
                                               Dia = p.DiaPedido
                                           })
                                           .ToList();
+                #region Comment
                 //foreach (var item in listaEquipoIds)
                 //{
-                    
                 //    var pedidoEquipo = contexto.Pedido.Where(x => x.EquipoId == item)
                 //                                      .Select(x => new PedidoResumen()
                 //                                      {
@@ -124,7 +128,8 @@ namespace DAL.DAO
                 //                                      .ToList()
                 //                                      .LastOrDefault();
                 //    listaPedido.Add(pedidoEquipo);
-                //}
+                //} 
+                #endregion
                 return demo;
             }
         }

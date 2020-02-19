@@ -28,7 +28,7 @@ ERROR
 Se repite codigo en EquipoDao y PedidoDao
 delegar la tarea de .bat .batch
 
-Pruebas:
+Pruebas:	OK
 	CRUD:
 		Comida
 		Usuario

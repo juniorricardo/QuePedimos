@@ -10,23 +10,22 @@ namespace DAL.DAO
 {
     public class EquipoDAO
     {
-        public List<Equipo> ListarEquipos()
+        public async Task<List<Equipo>> ListarEquipos()
         {
             using (var contexto = new QuePedimosContext())
             {
-                var lista = contexto.Equipo.Include("Integrantes")
-                                           .ToList();
-                return lista;
-            };
+                return await contexto.Equipo.Include("Integrantes")
+                                            .ToListAsync();
+            }
         }
 
-        public Equipo BuscarEquipoPorId(int? enEquipoId)
+        public async Task<Equipo> BuscarEquipoPorId(int? enEquipoId)
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Equipo.Include("Integrantes")
-                                      .FirstOrDefault(x => x.Id == enEquipoId);
-            };
+                return await contexto.Equipo.Include("Integrantes")
+                                            .FirstOrDefaultAsync(x => x.Id == enEquipoId);
+            }
         }
 
         public void AgregarEquipo(int[] enListaIntegrantesId, int[] enListaComidasIds)
@@ -58,7 +57,7 @@ namespace DAL.DAO
                                             .ElementAt(rand.Next(equipo.Comidas.Count))
                 });
                 contexto.SaveChanges();
-            };
+            }
         }
 
         public void ActualizarEquipo(int enEquipoId, int[] enIntegrantesIds)
@@ -78,7 +77,7 @@ namespace DAL.DAO
                 nuevosIntegrantes.ForEach(x => equipo.Integrantes.Add(x));
                 equipo.FechaUltimaModificacion = DateTime.Now;
                 contexto.SaveChanges();
-            };
+            }
         }
 
         public void EliminarEquipo(int enEquipoId)
@@ -89,7 +88,7 @@ namespace DAL.DAO
                 contexto.Entry(equipo).State = EntityState.Deleted;
                 contexto.Equipo.Remove(equipo);
                 contexto.SaveChanges();
-            };
+            }
         }
     }
 }

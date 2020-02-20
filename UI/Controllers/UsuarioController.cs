@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BE;
@@ -16,19 +17,19 @@ namespace UI.Controllers
         private UsuarioBL usuarioBL = new UsuarioBL();
 
         // GET: Usuario
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(usuarioBL.ListaUsuarios());
+            return View(await usuarioBL.ListaUsuarios());
         }
 
         // GET: Usuario/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
+            Usuario usuario = await usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -54,18 +55,17 @@ namespace UI.Controllers
                 usuarioBL.AgregarUsuario(usuario);
                 return RedirectToAction("Index");
             }
-
             return View(usuario);
         }
 
         // GET: Usuario/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
+            Usuario usuario = await usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -89,13 +89,13 @@ namespace UI.Controllers
         }
 
         // GET: Usuario/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = usuarioBL.BuscarUsuarioPorId(id);
+            Usuario usuario = await usuarioBL.BuscarUsuarioPorId(id);
             if (usuario == null)
             {
                 return HttpNotFound();

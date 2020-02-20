@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BE;
@@ -20,24 +21,24 @@ namespace UI.Controllers
         private ComidaBL comidaBL = new ComidaBL();
 
         // GET: NuevoEquipo
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             /*
              Generar registro en 'Pedido' 
              */
 
             ViewBag.Pedidos = pedidoBL.ListarPedidos();
-            return View(equipoBL.ListaEquipos());
+            return View(await equipoBL.ListaEquipos());
         }
 
         // GET: NuevoEquipo/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = equipoBL.BuscarEquipoPorId(id);
+            Equipo equipo = await equipoBL.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();
@@ -46,10 +47,10 @@ namespace UI.Controllers
         }
 
         // GET: NuevoEquipo/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.ListaComidas = comidaBL.ListaComidas();
-            return View(usuarioBL.ListaUsuarios());
+            ViewBag.ListaComidas = await comidaBL.ListaComidas();
+            return View(await usuarioBL.ListaUsuarios());
         }
 
         // POST: NuevoEquipo/Create
@@ -61,25 +62,25 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                equipoBL.AgregarEquipo(Empleados , Comidas);
+                equipoBL.AgregarEquipo(Empleados, Comidas);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         // GET: NuevoEquipo/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = equipoBL.BuscarEquipoPorId(id);
+            Equipo equipo = await equipoBL.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Usuarios = usuarioBL.ListaUsuarios();
+            ViewBag.Usuarios = await usuarioBL.ListaUsuarios();
 
             #region Editar-Doble Lista
             /*  Doble lista
@@ -114,13 +115,13 @@ namespace UI.Controllers
         }
 
         // GET: NuevoEquipo/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipo equipo = equipoBL.BuscarEquipoPorId(id);
+            Equipo equipo = await equipoBL.BuscarEquipoPorId(id);
             if (equipo == null)
             {
                 return HttpNotFound();

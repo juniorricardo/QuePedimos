@@ -12,13 +12,14 @@ namespace BL
     {
         private PedidoDAO pedidoDao = new PedidoDAO();
 
-        public void VerificarPedidos()
-        {
-            pedidoDao.VerificarPedidos();
-        }
         public List<PedidoResumen> ListarPedidos()
         {
             return pedidoDao.ListarPedidos();
+        }
+
+        public void VerificarPedidos()
+        {
+            pedidoDao.VerificarPedidos();
         }
     }
 }

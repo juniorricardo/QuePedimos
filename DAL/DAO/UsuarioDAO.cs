@@ -10,20 +10,20 @@ namespace DAL.DAO
 {
     public class UsuarioDAO
     {
-        public List<Usuario> ListarUsuarios()
+        public async Task<List<Usuario>> ListarUsuarios()
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Usuario.ToList();
-            };
+                return await contexto.Usuario.ToListAsync();
+            }
         }
 
-        public Usuario BuscarPorId(int? enUsuarioId)
+        public async Task<Usuario> BuscarPorId(int? enUsuarioId)
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Usuario.Find(enUsuarioId);
-            };
+                return await contexto.Usuario.FindAsync(enUsuarioId);
+            }
         }
 
         public void AgregarUsuario(Usuario enUsuario)
@@ -32,7 +32,7 @@ namespace DAL.DAO
             {
                 contexto.Usuario.Add(enUsuario);
                 contexto.SaveChanges();
-            };
+            }
         }
 
         public void ActualizarUsuario(Usuario enUsuario)
@@ -41,7 +41,7 @@ namespace DAL.DAO
             {
                 contexto.Entry(enUsuario).State = EntityState.Modified;
                 contexto.SaveChanges();
-            };
+            }
         }
         public void EliminarUsuario(int enUsuarioId)
         {
@@ -51,7 +51,7 @@ namespace DAL.DAO
                 contexto.Entry(usuario).State = EntityState.Deleted;
                 contexto.Usuario.Remove(usuario);
                 contexto.SaveChanges();
-            };
+            }
         }
     }
 }

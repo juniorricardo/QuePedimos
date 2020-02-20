@@ -13,14 +13,14 @@ namespace BL
     public class ComidaBL
     {
         private ComidaDAO comidaDao = new ComidaDAO();
-        public List<Comida> ListaComidas()
+        public async Task<List<Comida>> ListaComidas()
         {
-            return comidaDao.ListarComida();
+            return await comidaDao.ListarComida();
         }
 
-        public Comida BuscarComidaPorId(int? enComidaId)
+        public async Task<Comida> BuscarComidaPorId(int? enComidaId)
         {
-            return comidaDao.BuscarComidaId(enComidaId);
+            return await comidaDao.BuscarComidaId(enComidaId);
         }
 
         public void AgregarComida(Comida enComida)

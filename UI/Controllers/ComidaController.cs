@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BE;
@@ -16,24 +17,24 @@ namespace UI.Controllers
         private ComidaBL comidaBL = new ComidaBL();
 
         // GET: Comida
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(comidaBL.ListaComidas());
+            return View(await comidaBL.ListaComidas());
         }
 
         // GET: Comida/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = comidaBL.BuscarComidaPorId(id);
+            Comida comida = await comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
             }
-            return View(comida); 
+            return View(comida);
         }
 
         // GET: Comida/Create
@@ -59,13 +60,13 @@ namespace UI.Controllers
         }
 
         // GET: Comida/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = comidaBL.BuscarComidaPorId(id);
+            Comida comida = await comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
@@ -89,13 +90,13 @@ namespace UI.Controllers
         }
 
         // GET: Comida/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comida comida = comidaBL.BuscarComidaPorId(id);
+            Comida comida = await comidaBL.BuscarComidaPorId(id);
             if (comida == null)
             {
                 return HttpNotFound();
@@ -106,9 +107,9 @@ namespace UI.Controllers
         // POST: Comida/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Comida comida = comidaBL.BuscarComidaPorId(id);
+            Comida comida = await comidaBL.BuscarComidaPorId(id);
             comidaBL.EliminarComida(comida);
             return RedirectToAction("Index");
         }

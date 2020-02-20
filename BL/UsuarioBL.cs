@@ -13,14 +13,15 @@ namespace BL
     public class UsuarioBL
     {
         private UsuarioDAO usuarioDao = new UsuarioDAO();
-        public List<Usuario> ListaUsuarios()
+
+        public async Task<List<Usuario>> ListaUsuarios()
         {
-            return usuarioDao.ListarUsuarios();
+            return await usuarioDao.ListarUsuarios();
         }
 
-        public Usuario BuscarUsuarioPorId(int? enUsuarioId)
+        public async Task<Usuario> BuscarUsuarioPorId(int? enUsuarioId)
         {
-            return usuarioDao.BuscarPorId(enUsuarioId);
+            return await usuarioDao.BuscarPorId(enUsuarioId);
         }
 
         public void AgregarUsuario(Usuario enUsuario)

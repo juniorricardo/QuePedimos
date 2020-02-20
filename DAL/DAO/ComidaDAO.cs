@@ -10,19 +10,19 @@ namespace DAL.DAO
 {
     public class ComidaDAO
     {
-        public List<Comida> ListarComida()
-        {
-            using(var contexto = new QuePedimosContext())
-            {
-                return contexto.Comida.ToList();
-            }
-        }
-
-        public Comida BuscarComidaId(int? enComidaId)
+        public async Task<List<Comida>> ListarComida()
         {
             using (var contexto = new QuePedimosContext())
             {
-                return contexto.Comida.Find(enComidaId);
+                return await contexto.Comida.ToListAsync();
+            }
+        }
+
+        public async Task<Comida> BuscarComidaId(int? enComidaId)
+        {
+            using (var contexto = new QuePedimosContext())
+            {
+                return await contexto.Comida.FindAsync(enComidaId);
             };
         }
 
@@ -32,7 +32,7 @@ namespace DAL.DAO
             {
                 contexto.Comida.Add(enComida);
                 contexto.SaveChanges();
-            };
+            }
         }
 
         public void ActualizarComida(Comida enComida)
@@ -41,7 +41,7 @@ namespace DAL.DAO
             {
                 contexto.Entry(enComida).State = EntityState.Modified;
                 contexto.SaveChanges();
-            };
+            }
         }
         public void EliminarComida(Comida enComida)
         {

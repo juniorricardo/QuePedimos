@@ -13,14 +13,14 @@ namespace BL
     public class EquipoBL
     {
         private EquipoDAO equipoDao = new EquipoDAO();
-        public List<Equipo> ListaEquipos()
+        public async Task<List<Equipo>> ListaEquipos()
         {
-            return equipoDao.ListarEquipos();
+            return await equipoDao.ListarEquipos();
         }
 
-        public Equipo BuscarEquipoPorId(int? enEquipoId)
+        public async Task<Equipo> BuscarEquipoPorId(int? enEquipoId)
         {
-            return equipoDao.BuscarEquipoPorId(enEquipoId);
+            return await equipoDao.BuscarEquipoPorId(enEquipoId);
         }
 
         public void AgregarEquipo(int[] enListaIntegrantesIds , int[] enListaComidasIds)

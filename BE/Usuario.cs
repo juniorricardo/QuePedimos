@@ -15,7 +15,9 @@ namespace BE
         public string Nombre { get; set; }
         [StringLength(20)]
         public string Apellido { get; set; }
+
         [StringLength(25)]
+        [DataType(DataType.EmailAddress)]
         public string Correo { get; set; }
         [Required]
         public int Dni { get; set; }

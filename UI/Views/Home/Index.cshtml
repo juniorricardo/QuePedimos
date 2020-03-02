@@ -1,11 +1,35 @@
-﻿@{
+﻿@model List<BE.PedidoResumen>
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1 class="text-center">Que Pedimos</h1>
+    <div class="container">
+        <h2>Lista de los sorteados</h2>
+        <div class="row justify-content-around">
+            @foreach (var pedido in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="card text-center border border-primary rounded">
+                        <div style="margin: auto;">
+                            <div class="card-body" style="padding: 10px;">
+                                <h2 class="card-title">Equipo @pedido.EquipoId</h2>
+                                <div class="card-text">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">@pedido.Nombre @pedido.Apellido</li>
+                                        <li class="list-group-item">@pedido.Dia.ToString("dddd,dd,MMMM")</li>
+                                        <li class="list-group-item">@pedido.Comida</li>
+                                    </ul>
+                                </div>
+                                <a href="#" class="card-link btn btn-lg btn-primary btn-block">Ver equipo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
 <div class="row">
